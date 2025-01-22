@@ -4,6 +4,12 @@
       <!-- Sign In Form -->
       <form (ngSubmit)="onLogin()" class="sign-in-form">
         <h2 class="title">Sign In</h2>
+        <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="successMessage" class="success-message">
+            {{ successMessage }}
+          </div>
         <div class="input-field">
           <i class="fas fa-user"></i>
           <input
@@ -68,6 +74,13 @@
           />
         </div>
         <button type="submit" class="btn">Sign Up</button>
+        <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="successMessage" class="success-message">
+            {{ successMessage }}
+          </div>
+          
         <p class="social-text">Or Sign up with social platforms</p>
         <div class="social-media">
           <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>

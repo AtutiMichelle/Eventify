@@ -1,0 +1,104 @@
+<div class="container" #container>
+  <div class="forms-container">
+    <div class="signin-signup">
+      <!-- Sign In Form -->
+      <form (ngSubmit)="onLogin()" class="sign-in-form">
+        <h2 class="title">Sign In</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input
+            type="text"
+            placeholder="Username"
+            [(ngModel)]="loginData.username"
+            name="username"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="loginData.password"
+            name="password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <p class="social-text">Or Sign in with social platforms</p>
+        <div class="social-media">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form (ngSubmit)="onSignup()" class="sign-up-form">
+        <h2 class="title">Sign Up</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input
+            type="text"
+            placeholder="Username"
+            [(ngModel)]="signupData.username"
+            name="signup-username"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input
+            type="email"
+            placeholder="Email"
+            [(ngModel)]="signupData.email"
+            name="email"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="signupData.password"
+            name="signup-password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Sign Up</button>
+        <p class="social-text">Or Sign up with social platforms</p>
+        <div class="social-media">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>New here?</h3>
+        <p>
+          Join us and discover great opportunities to attend amazing events!
+        </p>
+        <button class="btn transparent" (click)="toggleMode()">Sign up</button>
+      </div>
+      <img src="/images/signup.svg" class="image" alt="Events" />
+    </div>
+    <div class="panel right-panel">
+      <div class="content">
+        <h3>One of us?</h3>
+        <p>
+          Already have an account? Sign in and continue your journey with us!
+        </p>
+        <button class="btn transparent" (click)="toggleMode()">Sign in</button>
+      </div>
+      <img src="/images/login.svg" class="image" alt="Events" />
+    </div>
+  </div>
+</div>

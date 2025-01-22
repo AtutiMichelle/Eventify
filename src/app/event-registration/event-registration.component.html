@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="forms-container">
+    <div class="signin-signup">
+      <form
+        [formGroup]="registrationForm"
+        (ngSubmit)="onSubmit()"
+        class="sign-in-form"
+      >
+        <h2 class="title">Event Registration</h2>
+
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input
+            type="text"
+            formControlName="firstName"
+            placeholder="First Name"
+          />
+        </div>
+        <div
+          class="error"
+          *ngIf="registrationForm.get('firstName')?.errors?.['required'] && registrationForm.get('firstName')?.touched"
+        >
+          First name is required
+        </div>
+
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input
+            type="text"
+            formControlName="lastName"
+            placeholder="Last Name"
+          />
+        </div>
+        <div
+          class="error"
+          *ngIf="registrationForm.get('lastName')?.errors?.['required'] && registrationForm.get('lastName')?.touched"
+        >
+          Last name is required
+        </div>
+
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input type="email" formControlName="email" placeholder="Email" />
+        </div>
+        <div
+          class="error"
+          *ngIf="registrationForm.get('email')?.errors?.['required'] && registrationForm.get('email')?.touched"
+        >
+          Email is required
+        </div>
+
+        <div class="input-field">
+          <i class="fas fa-calendar"></i>
+          <select formControlName="selectedEvent">
+            <option value="">Select Event</option>
+            <option *ngFor="let event of events" [value]="event.id">
+              {{ event.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          class="error"
+          *ngIf="registrationForm.get('selectedEvent')?.errors?.['required'] && registrationForm.get('selectedEvent')?.touched"
+        >
+          Please select an event
+        </div>
+
+        <input
+          type="submit"
+          value="Register"
+          class="btn solid"
+          [disabled]="!registrationForm.valid"
+        />
+      </form>
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>Welcome to Eventify</h3>
+        <p>
+          Register for your upcoming events and get ready for an amazing
+          experience!
+        </p>
+      </div>
+    
+      <img src="/images/event_reg.svg" class="image" alt="Events" />
+    </div>
+  </div>
+</div>

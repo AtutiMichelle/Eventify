@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { EventRegistrationComponent } from './event-registration/event-registration.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [RouterOutlet, EventRegistrationComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Eventify';

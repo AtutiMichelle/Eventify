@@ -61,9 +61,11 @@ export class AuthComponent {
       this.errorMessage = '';
       // Store logged in user
       localStorage.setItem('currentUser', JSON.stringify(user));
-      // Navigate to event registration after successful login
+
+      localStorage.setItem('username',user.username);      
+      // Navigate after successful login
       setTimeout(() => {
-        this.router.navigate(['/event-registration']);
+        this.router.navigate(['/user-dashboard']);
       }, 1000);
     } else {
       this.errorMessage = 'Invalid username or password';

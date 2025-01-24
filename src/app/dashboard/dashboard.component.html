@@ -1,0 +1,75 @@
+<header class="header">
+  <div class="logo">
+    <a href="#">Eventify</a>
+    <!-- <div class="search_box">
+      <input type="text" placeholder="Search Events" />
+      <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+    </div> -->
+  </div>
+
+  <div class="header-icons">
+    <i class="fas fa-bell"></i>
+    <div class="account">
+      <img src="./assets/img/user.jpg" alt="User Image" />
+      <h4>{{ username }}</h4>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <nav>
+    <div class="side_navbar">
+    
+      <a href="#" class="active">Dashboard</a>
+      <a href="#">Profile</a>
+      <a href="/event-registration">Event Registration</a>
+      <a href="#">Applications</a>
+     
+
+      
+    </div>
+  </nav>
+
+  <div class="main-body">
+    <h2>Dashboard</h2>
+    <div class="promo_card">
+      <h1>Welcome to Eventify, {{ username }}!</h1>
+      <span>Your personalized dashboard is ready to help you manage your events efficiently.</span>
+      
+    </div>
+
+    <div class="history_lists">
+      <div class="list1" style="flex: 1;"> 
+        <div class="row">
+          <h4>Event History</h4>
+          <a href="#">See all</a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Event Name</th>
+              <th>Type</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="registeredEvents.length === 0">
+              <td colspan="5">No events registered yet.</td>
+            </tr>
+            <tr *ngFor="let event of registeredEvents; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ event.date }}</td>
+              <td>{{ event.name }}</td>
+              <td>{{ event.type }}</td>
+              <td>{{ event.amount }}</td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+    </div>
+      
+    </div>
+  </div>

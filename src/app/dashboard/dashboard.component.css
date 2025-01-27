@@ -94,7 +94,7 @@ body {
 
 /* Side menubar section */
 nav {
-  background: #fff;
+  background: #ffffff97;
 }
 
 .side_navbar {
@@ -102,7 +102,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 250px;
+  width: 190px;
   height:calc(100%-10px); 
 }
 
@@ -135,7 +135,7 @@ nav {
 
 /* Main Body Section */
 .main-body {
-  width: calc(100% - 250px );
+  width: calc(100% - 190px );
   padding: 1rem;
   display: flex;
   flex-direction: column;

@@ -11,4 +11,5 @@ export const routes: Routes = [
   { path: 'event-verification', component: EventVerificationComponent },
   { path: 'tag-printing', component: TagPrintingComponent },
   { path: 'user-dashboard', component:DashboardComponent},
+
 ];

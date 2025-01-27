@@ -1,1 +1,41 @@
-<p>event-verification works!</p>
+<div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form [formGroup]="verificationForm" (ngSubmit)="onSubmit()">
+          <div class="title">Event Verification</div>
+  
+          <!-- Verification Code Input -->
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              id="verificationCode"
+              formControlName="verificationCode"
+              placeholder="Enter Verification Code"
+            />
+          </div>
+          
+          <!-- Error and Success Messages -->
+          <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+          <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+  
+          <!-- Submit Button -->
+          <button type="submit" class="btn" [disabled]="!verificationForm.valid">
+            Verify
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>Welcome to Eventify</h3>
+            <p>
+                Enter your verification code to confirm your registration for the event
+            </p>
+          </div>
+        
+          <img src="/images/verify.svg" class="image" alt="Events" />
+        </div>
+  </div>
+  

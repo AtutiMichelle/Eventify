@@ -11,6 +11,7 @@ interface EventItem {
   type: string;
   amount: string;
   user:string;
+  verificationCode:string;
 }
 
 @Component({
@@ -63,6 +64,7 @@ export class EventRegistrationComponent {
       return;
     }
 
+      const verificationCode=Math.floor(Math.random()*1000000).toString();
       // Create an event object from the form values
       const registeredEvent: EventItem = {
         id: Date.now(), 
@@ -70,13 +72,16 @@ export class EventRegistrationComponent {
         date: new Date().toISOString().split('T')[0], // Current date
         type: 'General', 
         amount: '$100.00' ,
-        user:currentUser
+        user:currentUser,
+        verificationCode: verificationCode
       };
 
       // Store the registered event in local storage
       const registeredEvents = JSON.parse(localStorage.getItem('registeredEvents') || '[]');
       registeredEvents.push(registeredEvent);
       localStorage.setItem('registeredEvents', JSON.stringify(registeredEvents));
+
+      localStorage.setItem('verificationCode', verificationCode)
 
       this.successMessage='Event registered successfully'
       this.errorMessage=''

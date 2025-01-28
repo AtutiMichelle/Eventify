@@ -1,0 +1,64 @@
+
+    <div class="navbar">
+        <div class="logo">Eventify</div>
+            <div class="links">
+                <a href="#hero" (click)="scrollToSection($event, 'hero')">Home</a>
+                <a href="#about" (click)="scrollToSection($event, 'about')">About</a>
+                <a href="#features" (click)="scrollToSection($event, 'features')">Features</a>
+                <a href="#services" (click)="scrollToSection($event, 'services')">Services</a>
+        <!-- <button class="btn" (click)="navigateToPage()">Get Started</button> -->
+             </div>
+         </div>
+    <div class="container">
+
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Welcome to Eventify</h1>
+                <p>Your all-in-one Event Management Platform</p>
+                <button class="btn" (click)="navigateToPage()">Get Started</button>
+            </div>
+            <section id="svg-section">
+                <img src="/images/login.svg" alt="Signup Illustration" class="svg-image"/>
+            </section>
+        </section>
+
+        <section id="about">
+            <div class="about-content">
+                <h2>About Eventify</h2>
+                <p>Eventify is the ultimate solution to easily manage and attend events. 
+                    Our platform allows users to register, access event schedules, and get real-time updates for seamless participation. 
+                    Whether you're hosting an event or attending one, Eventify is designed to make the experience more convenient and organized.</p>
+            </div>
+            <div class="about-image">
+                <img src="/images/login.svg" alt="About Eventify">
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="features-heading">
+              <h2>Our Features</h2>
+              <p>Discover the incredible tools and capabilities Eventify offers to make your events seamless and enjoyable.</p>
+            </div>
+            <div class="features-container">
+              <div class="feature-card">
+                <i class="icon fas fa-calendar-alt"></i>
+                <h3>Event Scheduling</h3>
+                <p>Plan and manage your events effortlessly with our intuitive scheduling tools.</p>
+              </div>
+              <div class="feature-card">
+                <i class="icon fas fa-bell"></i>
+                <h3>Real-Time Updates</h3>
+                <p>Stay informed with live updates and notifications throughout your event.</p>
+              </div>
+              <div class="feature-card">
+                <i class="icon fas fa-users"></i>
+                <h3>Attendee Management</h3>
+                <p>Easily manage and track attendees for smooth and organized events.</p>
+              </div>
+            </div>
+          </section>
+          
+
+        
+    
+    </div>

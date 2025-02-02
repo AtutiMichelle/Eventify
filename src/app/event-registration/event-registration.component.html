@@ -8,47 +8,22 @@
       >
         <h2 class="title">Event Registration</h2>
 
-        <div class="input-field">
-          <i class="fas fa-user"></i>
-          <input
-            type="text"
-            formControlName="firstName"
-            placeholder="First Name"
-          />
-        </div>
-        <div
-          class="error"
-          *ngIf="registrationForm.get('firstName')?.errors?.['required'] && registrationForm.get('firstName')?.touched"
-        >
-          First name is required
+        <!-- Success Message -->
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
         </div>
 
-        <div class="input-field">
-          <i class="fas fa-user"></i>
-          <input
-            type="text"
-            formControlName="lastName"
-            placeholder="Last Name"
-          />
-        </div>
-        <div
-          class="error"
-          *ngIf="registrationForm.get('lastName')?.errors?.['required'] && registrationForm.get('lastName')?.touched"
-        >
-          Last name is required
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
         </div>
 
-        <div class="input-field">
-          <i class="fas fa-envelope"></i>
-          <input type="email" formControlName="email" placeholder="Email" />
-        </div>
-        <div
-          class="error"
-          *ngIf="registrationForm.get('email')?.errors?.['required'] && registrationForm.get('email')?.touched"
-        >
-          Email is required
+        <!-- Verification Code Display -->
+        <div *ngIf="verificationCode" class="verification-box">
+          <p>Your verification code: <strong>{{ verificationCode }}</strong></p>
         </div>
 
+        <!-- Select Event -->
         <div class="input-field">
           <i class="fas fa-calendar"></i>
           <select formControlName="selectedEvent">
@@ -65,6 +40,67 @@
           Please select an event
         </div>
 
+        <!-- Ticket Type -->
+        <div class="input-field">
+          <i class="fas fa-ticket-alt"></i>
+          <select formControlName="ticketType">
+            <option value="">Select Ticket Type</option>
+            <option *ngFor="let type of ticketTypes" [value]="type">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+        <div
+          class="error"
+          *ngIf="registrationForm.get('ticketType')?.errors?.['required'] && registrationForm.get('ticketType')?.touched"
+        >
+          Ticket type is required
+        </div>
+
+        <!-- Ticket Quantity -->
+        <div class="input-field">
+          <i class="fas fa-sort-numeric-up"></i>
+          <input
+            type="number"
+            formControlName="ticketQuantity"
+            placeholder="Ticket Quantity"
+            min="1"
+          />
+        </div>
+        <div
+          class="error"
+          *ngIf="registrationForm.get('ticketQuantity')?.errors?.['required'] && registrationForm.get('ticketQuantity')?.touched"
+        >
+          Ticket quantity is required
+        </div>
+
+        <!-- Payment Method -->
+        <div class="input-field">
+          <i class="fas fa-credit-card"></i>
+          <select formControlName="paymentMethod">
+            <option value="">Select Payment Method</option>
+            <option *ngFor="let method of paymentMethods" [value]="method">
+              {{ method }}
+            </option>
+          </select>
+        </div>
+        <div
+          class="error"
+          *ngIf="registrationForm.get('paymentMethod')?.errors?.['required'] && registrationForm.get('paymentMethod')?.touched"
+        >
+          Payment method is required
+        </div>
+
+        <!-- Special Requests -->
+        <div class="input-field">
+          <i class="fas fa-comment"></i>
+          <textarea
+            formControlName="specialRequests"
+            placeholder="Special Requests (optional)"
+          ></textarea>
+        </div>
+
+        <!-- Register Button -->
         <input
           type="submit"
           value="Register"
@@ -84,7 +120,7 @@
           experience!
         </p>
       </div>
-    
+
       <img src="/images/event_reg.svg" class="image" alt="Events" />
     </div>
   </div>

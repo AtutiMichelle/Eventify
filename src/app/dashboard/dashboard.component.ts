@@ -6,7 +6,7 @@ interface EventItem {
   date: string;
   name: string;
   type: string;
-  amount: string;
+  amount: string; 
   user: string;
 }
 

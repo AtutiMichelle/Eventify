@@ -50,22 +50,23 @@
               <th>#</th>
               <th>Date</th>
               <th>Event Name</th>
-              <th>Type</th>
-              <th>Amount</th>
+              <th> Ticket Type</th>
+              <th>Ticket Quantity</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngIf="registeredEvents.length === 0">
+            <tr *ngIf="!registeredEvents || registeredEvents.length === 0">
               <td colspan="5">No events registered yet.</td>
             </tr>
-            <tr *ngFor="let event of registeredEvents; let i = index">
+            <tr *ngFor="let eventReg of registeredEvents; let i = index">
               <td>{{ i + 1 }}</td>
-              <td>{{ event.date }}</td>
-              <td>{{ event.name }}</td>
-              <td>{{ event.type }}</td>
-              <td>{{ event.amount }}</td>
+              <td>{{ eventReg.event?.date || 'N/A' }}</td>  <!-- Use optional chaining -->
+              <td>{{ eventReg.event?.name || 'Unknown Event' }}</td>
+              <td>{{ eventReg.ticket_type }}</td>
+              <td>{{ eventReg.ticket_quantity }}</td>  <!-- Fix: Use ticket_quantity instead of amount -->
             </tr>
           </tbody>
+          
           
         </table>
       </div>

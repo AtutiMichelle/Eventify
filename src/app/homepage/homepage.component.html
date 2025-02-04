@@ -1,5 +1,5 @@
 
-    <div class="navbar">
+    <div class="navbar" [class.scrolled]="isScrolled">
         <div class="logo">Eventify</div>
             <div class="links">
                 <a href="#hero" (click)="scrollToSection($event, 'hero')">Home</a>
@@ -11,54 +11,131 @@
          </div>
     <div class="container">
 
-        <section id="hero">
-            <div class="hero-content">
-                <h1>Welcome to Eventify</h1>
-                <p>Your all-in-one Event Management Platform</p>
+      <section id="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Your Event, Your Way</h1>
+                <p>Seamlessly plan, register, and experience events like never before.</p>
                 <button class="btn" (click)="navigateToPage()">Get Started</button>
             </div>
-            <section id="svg-section">
-                <img src="/images/login.svg" alt="Signup Illustration" class="svg-image"/>
-            </section>
-        </section>
-
-        <section id="about">
-            <div class="about-content">
-                <h2>About Eventify</h2>
-                <p>Eventify is the ultimate solution to easily manage and attend events. 
-                    Our platform allows users to register, access event schedules, and get real-time updates for seamless participation. 
-                    Whether you're hosting an event or attending one, Eventify is designed to make the experience more convenient and organized.</p>
+        </div>
+        <!-- <div class="hero-image">
+            <img src="/images/home1.jpg" alt="Event Illustration">
+        </div> -->
+    </section>
+    
+    <section id="about">
+        <div class="about-content">
+            <!-- Text Section -->
+            <div class="about-text">
+                <h2>About Us</h2>
+                <p>We provide innovative event solutions tailored to make your experience seamless and efficient.</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Our platform offers customized event solutions for a smooth and efficient experience.</li>
+                <li><i class="fas fa-check-circle"></i> A user-friendly system ensures quick registration and secure attendee verification.</li>
+                <li><i class="fas fa-check-circle"></i> Real-time tools help organizers track attendance, schedules, and updates effortlessly.</li>
+                <li><i class="fas fa-check-circle"></i> We eliminate common event challenges, making coordination easy and stress-free.</li>
+                </ul>
             </div>
-            <div class="about-image">
-                <img src="/images/login.svg" alt="About Eventify">
+    
+            <!-- Image Section -->
+            <div class="about-images">
+                <img src="/images/home4.jpg" class="long-img" alt="Event 1">
+                <div class="small-images">
+                    <img src="/images/home5.jpg" alt="Event 2">
+                    <img src="/images/home5.jpg" alt="Event 3">
+                </div>
             </div>
-        </section>
-
-        <section id="features">
-            <div class="features-heading">
-              <h2>Our Features</h2>
-              <p>Discover the incredible tools and capabilities Eventify offers to make your events seamless and enjoyable.</p>
-            </div>
-            <div class="features-container">
-              <div class="feature-card">
+        </div>
+    </section>
+    
+      
+    <section id="features">
+        <div class="features-heading">
+            <h2>Features</h2>
+            <p>Discover the powerful tools and capabilities Eventify offers to make your events seamless and enjoyable.</p>
+        </div>
+        <div class="features-container">
+            <div class="feature-card">
                 <i class="icon fas fa-calendar-alt"></i>
                 <h3>Event Scheduling</h3>
                 <p>Plan and manage your events effortlessly with our intuitive scheduling tools.</p>
-              </div>
-              <div class="feature-card">
+            </div>
+            <div class="feature-card">
                 <i class="icon fas fa-bell"></i>
                 <h3>Real-Time Updates</h3>
                 <p>Stay informed with live updates and notifications throughout your event.</p>
-              </div>
-              <div class="feature-card">
+            </div>
+            <div class="feature-card">
                 <i class="icon fas fa-users"></i>
                 <h3>Attendee Management</h3>
                 <p>Easily manage and track attendees for smooth and organized events.</p>
-              </div>
             </div>
-          </section>
-          
-
-        
+            <div class="feature-card">
+                <i class="icon fas fa-ticket-alt"></i>
+                <h3>Secure Ticketing</h3>
+                <p>Offer secure digital ticketing and easy check-ins for your attendees.</p>
+            </div>
+            <div class="feature-card">
+                <i class="icon fas fa-chart-line"></i>
+                <h3>Analytics & Insights</h3>
+                <p>Gain real-time insights to measure your event’s success and engagement.</p>
+            </div>
+            <div class="feature-card">
+                <i class="icon fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Get round-the-clock assistance to ensure your event runs smoothly.</p>
+            </div>
+        </div>
+    </section>
     
+    <section id="services">
+        <!-- Centered Heading and Intro Message -->
+        <div class="services-heading">
+            <h2>Services</h2>
+            <p>Explore the wide range of services Eventify offers for a seamless event experience.</p>
+        </div>
+    
+        <!-- Layout: Service Cards (Left) + Image (Right) -->
+        <div class="services-content">
+            <!-- Left Side: Service Cards -->
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>Event Registration</h3>
+                        <p>Register for events effortlessly with a streamlined process.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>Live Event Hosting</h3>
+                        <p>Host virtual or physical events with professional management.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>Event Analytics</h3>
+                        <p>Get real-time insights into attendance and engagement.</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Right Side: Image -->
+            <div class="services-image">
+                <img src="/images/home6.jpg" alt="Event Management">
+            </div>
+        </div>
+    </section>
+    
+    
+      
     </div>

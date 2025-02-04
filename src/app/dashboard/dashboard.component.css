@@ -148,7 +148,7 @@ nav {
   margin-top: 10px;
   border-radius: 8px;
   padding: 0.5rem 1rem 1rem 3rem;
-  background-image: linear-gradient(-45deg, #4481eb 0%, rgb(178, 74, 252) 100%);
+  background: linear-gradient(to right, rgba(16, 9, 63, 0.9), rgba(52, 1, 58, 0.9), rgba(65, 21, 187, 0.9));
 }
 
 .promo_card h1,

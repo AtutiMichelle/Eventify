@@ -68,19 +68,30 @@ export class EventRegistrationComponent {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe(
         (response) => {
-          console.log('✅ User API Response:', response);
+          console.log('✅ Full API Response:', response);
+          
+          // ✅ Check if response is an object
+          if (typeof response !== 'object' || response === null) {
+            console.error('❌ Invalid API Response:', response);
+            this.errorMessage = 'Unexpected response format. Please try again.';
+            return;
+          }
   
-          if (!response || !response.user_id) {
-            console.error('❌ User details missing:', response);
+          // ✅ Log the keys in response
+          console.log('🔍 Response Keys:', Object.keys(response));
+  
+          // ✅ Fix: Extract `id` instead of `user_id`
+          if (!response.hasOwnProperty('id')) {
+            console.error('❌ Missing user ID in response:', response);
             this.errorMessage = 'User details not found. Please log in again.';
             return;
           }
   
-          const userId = response.user_id; 
-          console.log('User ID:', userId);
+          const userId = response.id;  // ✅ Corrected extraction
+          console.log('✅ Extracted User ID:', userId);
   
           const registrationData = {
-            user_id: userId,
+            user_id: userId,  // ✅ Now using the correct user ID
             event_id: this.registrationForm.value.selectedEvent,
             ticket_type: this.registrationForm.value.ticketType,
             ticket_quantity: this.registrationForm.value.ticketQuantity,
@@ -125,6 +136,7 @@ export class EventRegistrationComponent {
       this.successMessage = '';
     }
   }
+  
   
 }
      //const currentUser = localStorage.getItem('username');

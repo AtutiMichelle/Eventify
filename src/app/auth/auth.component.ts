@@ -54,8 +54,8 @@ export class AuthComponent {
       name: this.loginData.username,
       password: this.loginData.password,
     };
-
-    this.http.post<any>('http://127.0.0.1:8000/api/login', loginData).subscribe(
+  
+    this.http.post<any>('http://127.0.0.1:5000/api/login', loginData).subscribe(
       (response) => {
         const token = response.token;
         if (token) {
@@ -63,7 +63,7 @@ export class AuthComponent {
           localStorage.setItem('username', this.loginData.username);
           this.successMessage = 'Login successful!';
           this.errorMessage = '';
-
+  
           setTimeout(() => {
             this.router.navigate(['/user-dashboard']);
           }, 1000);
@@ -81,24 +81,20 @@ export class AuthComponent {
 
   onSignup() {
     const signupData = {
-      name: this.signupData.username,
+      username: this.signupData.username,
       email: this.signupData.email,
       password: this.signupData.password,
     };
-
-    this.http.post<any>('http://127.0.0.1:8000/api/register', signupData).subscribe(
+  
+    this.http.post<any>('http://127.0.0.1:5000/api/register', signupData).subscribe(
       (response) => {
         if (response.token) {
           this.successMessage = 'Registration successful! Please login';
           this.errorMessage = '';
           localStorage.setItem('auth_token', response.token);
-
-          this.signupData = {
-            username: '',
-            email: '',
-            password: '',
-          };
-
+  
+          this.signupData = { username: '', email: '', password: '' };
+  
           setTimeout(() => {
             this.toggleMode();
           }, 1500);

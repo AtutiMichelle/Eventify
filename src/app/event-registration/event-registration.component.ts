@@ -63,23 +63,24 @@ export class EventRegistrationComponent {
         return;
       }
   
-      this.http.get<any>('http://127.0.0.1:8000/api/user', {
+      // ✅ Fetch logged-in user details from Node.js backend
+      this.http.get<any>('http://localhost:5000/api/user', {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe(
         (response) => {
-          console.log('✅ User API Response:', response); // Debugging
+          console.log('✅ User API Response:', response);
   
-          if (!response || !response.user || !response.user.id) {
+          if (!response || !response.user_id) {
             console.error('❌ User details missing:', response);
             this.errorMessage = 'User details not found. Please log in again.';
             return;
           }
   
-          const userId = response.user.id; // 🔥 FIXED: Ensure correct user_id extraction
+          const userId = response.user_id; 
           console.log('User ID:', userId);
   
           const registrationData = {
-            user_id: userId,  // 🔥 Ensure user_id is included
+            user_id: userId,
             event_id: this.registrationForm.value.selectedEvent,
             ticket_type: this.registrationForm.value.ticketType,
             ticket_quantity: this.registrationForm.value.ticketQuantity,
@@ -94,12 +95,13 @@ export class EventRegistrationComponent {
             'Authorization': `Bearer ${token}`
           });
   
-          this.http.post<any>('http://127.0.0.1:8000/api/register-event', registrationData, { headers }).subscribe({
+          // ✅ Send event registration request to Node.js backend
+          this.http.post<any>('http://localhost:5000/api/register-event', registrationData, { headers }).subscribe({
             next: (response) => {
               console.log('✅ Registration API Response:', response);
               this.successMessage = 'Event registered successfully!';
               this.errorMessage = '';
-              this.verificationCode = response.registration?.verification_code || '';
+              this.verificationCode = response.verification_code || '';
   
               setTimeout(() => {
                 this.router.navigate(['/user-dashboard']);
@@ -122,7 +124,7 @@ export class EventRegistrationComponent {
       this.errorMessage = 'Please fill in all required fields correctly.';
       this.successMessage = '';
     }
-  } 
+  }
   
 }
      //const currentUser = localStorage.getItem('username');

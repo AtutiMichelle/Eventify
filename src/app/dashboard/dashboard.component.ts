@@ -91,7 +91,7 @@ export class DashboardComponent implements OnInit {
   
             return {
               event_id: eventReg.event_id,
-              event_name: eventReg.event_name || 'Unknown Event',  // Ensure it assigns event_name
+              event_name: eventReg.event_name,  // Ensure it assigns event_name
               date: eventReg.date,
               location: eventReg.location,
               description: eventReg.description,

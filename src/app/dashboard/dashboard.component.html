@@ -62,7 +62,7 @@
             <tr *ngFor="let eventReg of registeredEvents; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ eventReg?.date || 'N/A' }}</td>  <!-- Use optional chaining -->
-              <td>{{ eventReg?.event_name || 'Unknown Event' }}</td>
+              <td>{{ eventReg.event_name || 'Unknown Event' }}</td>
               <td>{{ eventReg.location}}</td>
               <td>{{ eventReg.ticket_type }}</td>
               <td>{{ eventReg.ticket_quantity }}</td>  <!-- Fix: Use ticket_quantity instead of amount -->

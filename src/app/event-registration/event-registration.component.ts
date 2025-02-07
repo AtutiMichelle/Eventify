@@ -3,20 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; 
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-
-
-
-// interface EventItem {
-//   id: number;
-//   name: string;
-//   date: string;
-//   type: string;
-//   amount: string;
-//   user:string;
-//   verificationCode:string;
-// }
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-event-registration',
@@ -27,32 +14,75 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class EventRegistrationComponent {
   registrationForm: FormGroup;
-  successMessage:string='';
-  errorMessage:string='';
+  successMessage: string = '';
+  errorMessage: string = '';
   verificationCode: string = '';
+  
 
-  events = [
-    { id: 1, name: 'Tech Conference 2024' },
-    { id: 2, name: 'Business Summit' },
-    { id: 3, name: 'Art Exhibition' }
-  ];
+  // events = [
+  //   { id: 1, name: 'Tech Conference 2024' },
+  //   { id: 2, name: 'Business Summit' },
+  //   { id: 3, name: 'Art Exhibition' }
+  // ];
 
-  ticketTypes =['General', 'VIP', 'Student'];
-  paymentMethods=['Mpesa', 'Credit Card', 'PayPal'];
+  // ticketTypes = [
+  //   { id: 101, type: 'General' },
+  //   { id: 102, type: 'VIP' },
+  //   { id: 103, type: 'Student' }
+  // ];
 
-  // registerEvent(){
-  //   localStorage.setItem('registeredEvent', JSON.stringify(this.events))
-  // }
+  events: any[]=[];
+  ticketTypes: any[]=[];
+
+  paymentMethods = ['Mpesa', 'Credit Card', 'PayPal'];
+
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
-    // Initialize the form with validation rules
     this.registrationForm = this.fb.group({
       selectedEvent: ['', Validators.required],
       ticketType: ['', Validators.required],
       ticketQuantity: ['1', [Validators.required, Validators.min(1)]],
       paymentMethod: ['', Validators.required],
-      specialRequests: ['']
+      specialRequests:['']
     });
   }
+
+  ngOnInit(){
+    this.fetchEvents();
+    this.fetchTicketTypes();
+  }
+  onEventChange(event: any) {
+    const selectedEventId = event.target.value;
+    console.log('Selected Event ID:', selectedEventId);  // Debugging line
+    // if (selectedEventId) {
+    //   this.fetchTicketTypes();
+    // }
+  }
+  
+  
+//i think the error occurs here so whats the problem?
+fetchEvents() {
+  this.http.get<any[]>('http://localhost:5000/api/event-details').subscribe({
+    next: (data) => {
+      console.log('Events fetched:', data); // Check the fetched data
+      this.events = data;
+    },
+    error: (err) => {
+      console.error('Error fetching events:', err);
+    }
+  });
+}
+
+fetchTicketTypes() {
+  this.http.get<any[]>(`http://localhost:5000/api/tickets/ticket-types`).subscribe({
+    next: (data) => {
+      console.log('Ticket types fetched:', data); // Debugging line
+      this.ticketTypes = data;
+    },
+    error: (err) => {
+      console.error('Error fetching ticket types:', err); // Debugging line
+    }
+  });
+}
 
   onSubmit() {
     if (this.registrationForm.valid) {
@@ -63,71 +93,70 @@ export class EventRegistrationComponent {
         return;
       }
   
-      // ✅ Fetch logged-in user details from Node.js backend
+      // ✅ Fetch logged-in user details
       this.http.get<any>('http://localhost:5000/api/user', {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe(
         (response) => {
-          console.log('✅ Full API Response:', response);
-          
-          // ✅ Check if response is an object
-          if (typeof response !== 'object' || response === null) {
-            console.error('❌ Invalid API Response:', response);
-            this.errorMessage = 'Unexpected response format. Please try again.';
-            return;
-          }
+          console.log("User details response:", response); // Debugging
   
-          // ✅ Log the keys in response
-          console.log('🔍 Response Keys:', Object.keys(response));
-  
-          // ✅ Fix: Extract `id` instead of `user_id`
-          if (!response.hasOwnProperty('id')) {
-            console.error('❌ Missing user ID in response:', response);
+          if (!response || typeof response !== 'object' || !response.id) {
             this.errorMessage = 'User details not found. Please log in again.';
             return;
           }
   
-          const userId = response.id;  // ✅ Corrected extraction
-          console.log('✅ Extracted User ID:', userId);
+          const userId = response.id;
+          const selectedEventId = this.registrationForm.value.selectedEvent;
+          const selectedTicketId = this.registrationForm.value.ticketType;
+          const ticketQuantity = this.registrationForm.value.ticketQuantity;
+
+          const selectedTicket = this.ticketTypes.find(ticket => ticket.id == this.registrationForm.value.ticketType);
+
+
+          if(!selectedTicket){
+            this.errorMessage='Invalid ticket type selected.';
+            return;
+          }
   
           const registrationData = {
-            user_id: userId,  // ✅ Now using the correct user ID
-            event_id: this.registrationForm.value.selectedEvent,
-            ticket_type: this.registrationForm.value.ticketType,
-            ticket_quantity: this.registrationForm.value.ticketQuantity,
+            user_id: userId,
+            event_id: selectedEventId,
+            ticket_id: selectedTicketId, // ✅ Using ID correctly
+            ticket_quantity: ticketQuantity,
             payment_method: this.registrationForm.value.paymentMethod,
-            special_requests: this.registrationForm.value.specialRequests
+            special_requests: this.registrationForm.value.specialRequests || null
+            
           };
   
-          console.log('🚀 Sending Registration Data:', registrationData);
-  
-          const headers = new HttpHeaders({ 
+          const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           });
   
-          // ✅ Send event registration request to Node.js backend
+          // ✅ Send event registration request
           this.http.post<any>('http://localhost:5000/api/register-event', registrationData, { headers }).subscribe({
             next: (response) => {
-              console.log('✅ Registration API Response:', response);
+              console.log("Registration response:", response); // Debugging
               this.successMessage = 'Event registered successfully!';
               this.errorMessage = '';
-              this.verificationCode = response.verification_code || '';
+              this.verificationCode = response.verification_code || 'N/A';
+              
+              localStorage.setItem('verificationCode', this.verificationCode);
   
               setTimeout(() => {
                 this.router.navigate(['/user-dashboard']);
               }, 3000);
             },
             error: (error) => {
-              console.error('❌ API Error:', error);
-              this.errorMessage = error.error.message || 'Error registering event. Please try again.';
+              console.error("Registration error:", error); // Debugging
+              this.errorMessage = error.error?.message || 'Error registering event. Please try again.';
               this.successMessage = '';
             }
           });
   
         },
         (error) => {
-          console.error('❌ User API Error:', error);
+          console.error("User details fetch error:", error); // Debugging
           this.errorMessage = 'Error fetching user details. Please log in again.';
         }
       );
@@ -137,8 +166,8 @@ export class EventRegistrationComponent {
     }
   }
   
-  
 }
+
      //const currentUser = localStorage.getItem('username');
 
     //   if(!currentUser){

@@ -3,20 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common'; // ✅ Import CommonModule for *ngIf & *ngFor
 
 interface EventItem {
-  id: number;
   event_id: number;
+  event_name: string;
+  date: string;
+  location: string;
+  description: string;
   ticket_type: string;
   ticket_quantity: number;
-  amount: number;
-  event: { 
-    id: number;
-    name: string;
-    date: string;
-    location: string;
-    description: string;
-    ticket_price: number;
-  };
+  payment_method: string;
+  verification_code: string;
 }
+
 
 @Component({
   selector: 'app-dashboard',
@@ -44,20 +41,20 @@ export class DashboardComponent implements OnInit {
   
     console.log('🚀 Using Token:', token);
 
-    this.http.get<any>('http://127.0.0.1:8000/api/user', {
+    this.http.get<any>('http://127.0.0.1:5000/api/user', {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe(
       response => {
         console.log('✅ Full User API Response:', response);
 
-        if (!response || !response.user || !response.user.id) {
+        if (!response || !response.id) { // Adjusted for Node.js response
           console.error('❌ User details missing:', response);
           this.errorMessage = 'User details not found. Please log in again.';
           return;
         }
-
-        this.userId = response.user.id;
-        this.username = response.user.name; 
+        
+        this.userId = response.id;
+        this.username = response.name;
         
         console.log('User ID:', this.userId);
         console.log('Username:', this.username);
@@ -78,21 +75,34 @@ export class DashboardComponent implements OnInit {
     }
   
     const token = localStorage.getItem('auth_token');
-
-    this.http.get<EventItem[]>(`http://127.0.0.1:8000/api/user-registrations/${this.userId}`, {
+  
+    this.http.get<EventItem[]>(`http://127.0.0.1:5000/api/user-registrations`, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe(
       response => {
-        console.log('✅ Registered Events:', response);
-
+        console.log('✅ Raw Registered Events Response:', response);
+  
         if (!response || response.length === 0) {
           console.warn('⚠ No events found for the user.');
           this.registeredEvents = [];
         } else {
-          this.registeredEvents = response.map(eventReg => ({
-            ...eventReg,
-            event: eventReg.event || { id: 0, name: 'Unknown Event', date: 'N/A' }
-          }));
+          this.registeredEvents = response.map(eventReg => {
+            console.log('📌 Individual Event:', eventReg);  // Debug each event
+  
+            return {
+              event_id: eventReg.event_id,
+              event_name: eventReg.event_name || 'Unknown Event',  // Ensure it assigns event_name
+              date: eventReg.date,
+              location: eventReg.location,
+              description: eventReg.description,
+              ticket_type: eventReg.ticket_type,
+              ticket_quantity: eventReg.ticket_quantity,
+              payment_method: eventReg.payment_method,
+              verification_code: eventReg.verification_code
+            };
+          });
+  
+          console.log('✅ Mapped Events:', this.registeredEvents);  // Debug final mapped array
         }
       },
       error => {
@@ -101,4 +111,5 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+  
 }

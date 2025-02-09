@@ -2,33 +2,25 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
-import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../services/auth.service'; 
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink, HttpClientModule],
+  imports: [FormsModule, CommonModule, RouterLink],
 })
 export class AuthComponent {
   @ViewChild('container') container!: ElementRef;
 
-  loginData = {
-    username: '',
-    password: '',
-  };
-
-  signupData = {
-    username: '',
-    email: '',
-    password: '',
-  };
+  loginData = { name: '', password: '' };
+  signupData = { name: '', email: '', password: '' };
 
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private authService: AuthService) {} 
 
   toggleMode() {
     this.container.nativeElement.classList.toggle('sign-up-mode');
@@ -36,34 +28,16 @@ export class AuthComponent {
     this.successMessage = '';
   }
 
-  /**
-   * ✅ Function to get authorization headers with Bearer token
-   */
-  getAuthHeaders() {
-    const token = localStorage.getItem('auth_token');
-    return {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json'
-      })
-    };
-  }
-
   onLogin() {
-    const loginData = {
-      name: this.loginData.username,
-      password: this.loginData.password,
-    };
-  
-    this.http.post<any>('http://127.0.0.1:5000/api/login', loginData).subscribe(
+    this.authService.login(this.loginData).subscribe(
       (response) => {
         const token = response.token;
         if (token) {
           localStorage.setItem('auth_token', token);
-          localStorage.setItem('username', this.loginData.username);
+          localStorage.setItem('name', this.loginData.name);
           this.successMessage = 'Login successful!';
           this.errorMessage = '';
-  
+
           setTimeout(() => {
             this.router.navigate(['/user-dashboard']);
           }, 1000);
@@ -80,41 +54,31 @@ export class AuthComponent {
   }
 
   onSignup() {
-    const signupData = {
-      username: this.signupData.username,
-      email: this.signupData.email,
-      password: this.signupData.password,
-    };
+    console.log("📤 Sending signup data:", this.signupData); // Debugging line
   
-    this.http.post<any>('http://127.0.0.1:5000/api/register', signupData).subscribe(
+    this.authService.signup(this.signupData).subscribe(
       (response) => {
-        if (response.token) {
-          this.successMessage = 'Registration successful! Please login';
-          this.errorMessage = '';
-          localStorage.setItem('auth_token', response.token);
+        console.log("✅ Signup Success:", response);
+        this.successMessage = "Registration successful! Please log in.";
+        this.errorMessage = "";
+        localStorage.setItem("auth_token", response.token);
   
-          this.signupData = { username: '', email: '', password: '' };
+        this.signupData = { name: "", email: "", password: "" };
   
-          setTimeout(() => {
-            this.toggleMode();
-          }, 1500);
-        } else {
-          this.errorMessage = 'Registration failed. Please try again';
-          this.successMessage = '';
-        }
+        setTimeout(() => {
+          this.toggleMode();
+        }, 1500);
       },
       (error) => {
-        this.errorMessage = 'Error registering. Please try again';
-        this.successMessage = '';
+        console.error("❌ Signup Error:", error);
+        this.errorMessage = "Error registering. Please try again.";
+        this.successMessage = "";
       }
     );
   }
-
-  /**
-   * ✅ Function to fetch user details using the stored token
-   */
+  
   fetchUserDetails() {
-    this.http.get<any>('http://127.0.0.1:8000/api/user', this.getAuthHeaders()).subscribe(
+    this.authService.fetchUserDetails().subscribe(
       (response) => {
         console.log('User Data:', response);
       },

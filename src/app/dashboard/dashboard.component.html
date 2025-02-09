@@ -19,15 +19,10 @@
 <div class="container">
   <nav>
     <div class="side_navbar">
-    
       <a href="#" class="active">Dashboard</a>
       <a href="#">Profile</a>
       <a href="#">Events</a>
       <a href="/event-registration">Event Registration</a>
-     
-     
-
-      
     </div>
   </nav>
 
@@ -36,7 +31,6 @@
     <div class="promo_card">
       <h1>Welcome to Eventify, {{ username }}!</h1>
       <span>Your personalized dashboard is ready to help you manage your events efficiently.</span>
-      
     </div>
 
     <div class="history_lists">
@@ -52,28 +46,28 @@
               <th>Date</th>
               <th>Event Name</th>
               <th>Event Location</th>
-              <th> Ticket Type</th>
+              <th>Ticket Type</th>
               <th>Ticket Quantity</th>
             </tr>
           </thead>
           <tbody>
+            <!-- ✅ Show message when no events are registered -->
             <tr *ngIf="!registeredEvents || registeredEvents.length === 0">
-              <td colspan="5">No events registered yet.</td>
+              <td colspan="6">No events registered yet.</td> <!-- ✅ Fixed colspan to 6 -->
             </tr>
+
+            <!-- ✅ Iterate through registered events safely -->
             <tr *ngFor="let eventReg of registeredEvents; let i = index">
               <td>{{ i + 1 }}</td>
-              <td>{{ eventReg?.date || 'N/A' }}</td>  <!-- Use optional chaining -->
-              <td>{{ eventReg.event_name || 'Unknown Event' }}</td>
-              <td>{{ eventReg.location}}</td>
-              <td>{{ eventReg.ticket_type }}</td>
-              <td>{{ eventReg.ticket_quantity }}</td>  <!-- Fix: Use ticket_quantity instead of amount -->
+              <td>{{ eventReg?.date || 'N/A' }}</td>
+              <td>{{ eventReg?.event_name || 'Unknown Event' }}</td>
+              <td>{{ eventReg?.location || 'Not Specified' }}</td>
+              <td>{{ eventReg?.ticket_type || 'General' }}</td>
+              <td>{{ eventReg?.ticket_quantity || 1 }}</td>
             </tr>
           </tbody>
-          
-          
         </table>
       </div>
     </div>
-      
-    </div>
   </div>
+</div>

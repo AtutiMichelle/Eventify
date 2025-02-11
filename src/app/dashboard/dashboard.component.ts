@@ -1,17 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; 
-import { HttpClient } from '@angular/common/http';
-import { DashboardService } from '../services/dashboard.service'; // ✅ Ensure correct path
+import { DashboardService } from '../services/dashboard.service'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faUser, faBell, faTachometerAlt, faCalendarAlt, faEdit, faSignOutAlt, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  faUser = faUser;
+  faBell = faBell;
+  faTachometerAlt = faTachometerAlt;
+  faCalendarAlt = faCalendarAlt;
+  faEdit = faEdit;
+  faSignOutAlt = faSignOutAlt;
+  faMagnifyingGlass = faMagnifyingGlass;
+
+
   username: string = '';
   userId: number | null = null;
   registeredEvents: { date: string; event_name: string; location: string; ticket_type: string; ticket_quantity: number }[] = []; // ✅ Fix: Explicit type
@@ -52,4 +61,12 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+  logout(event: Event) {
+    event.preventDefault(); // Prevent the default anchor behavior
+    this.dashboardService.logout(); // Clear the token
+    window.location.href = '../'; // Redirect to login page
+  }
+  
+  
 }

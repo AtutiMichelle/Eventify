@@ -26,4 +26,9 @@ export class DashboardService {
       headers: this.getAuthHeaders(),
     });
   }
+
+  logout(): void {
+    localStorage.removeItem('auth_token'); // Remove the token
+  }
+  
 }

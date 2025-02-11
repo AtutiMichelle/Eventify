@@ -8,9 +8,9 @@
   </div>
 
   <div class="header-icons">
-    <i class="fas fa-bell"></i>
+    <!-- <fa-icon [icon]="faBell"></fa-icon> -->
     <div class="account">
-      <img src="./assets/img/user.jpg" alt="User Image" />
+      <img src="/images/user2.svg" alt="User Image" />
       <h4>{{ username }}</h4>
     </div>
   </div>
@@ -19,12 +19,28 @@
 <div class="container">
   <nav>
     <div class="side_navbar">
-      <a href="#" class="active">Dashboard</a>
-      <a href="#">Profile</a>
-      <a href="#">Events</a>
-      <a href="/event-registration">Event Registration</a>
+      <a href="#" class="active">
+        <fa-icon [icon]="faTachometerAlt"></fa-icon> <span>Dashboard</span>
+      </a>
+      <a href="#">
+        <fa-icon [icon]="faUser"></fa-icon> <span>Profile</span>
+      </a>
+      <a href="#">
+        <fa-icon [icon]="faCalendarAlt"></fa-icon> <span>Events</span>
+      </a>
+      <a href="/event-registration">
+        <fa-icon [icon]="faEdit"></fa-icon> <span>Event Registration</span>
+      </a>
+
+      <div class="logout">
+        <a href="#" (click)="logout($event)">
+          <fa-icon [icon]="faSignOutAlt"></fa-icon> Logout
+        </a>
+      </div>
+      
     </div>
   </nav>
+  
 
   <div class="main-body">
     <h2>Dashboard</h2>

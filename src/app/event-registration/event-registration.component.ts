@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; 
 import { HttpClient } from '@angular/common/http';
-import { EventRegistrationService } from '../services/event-registration.service'; // Import the service
+import { CoreService } from '../services/core.service'; // Import the service
 
 @Component({
   selector: 'app-event-registration',
@@ -25,7 +25,7 @@ export class EventRegistrationComponent {
     private fb: FormBuilder, 
     private router: Router, 
     private http: HttpClient, 
-    private eventRegistrationService: EventRegistrationService  // ✅ Use the new service
+    private coreService: CoreService  // ✅ Use the new service
   ) {
     this.registrationForm = this.fb.group({
       selectedEvent: ['', Validators.required],
@@ -42,7 +42,7 @@ export class EventRegistrationComponent {
   }
 
   fetchEvents() {
-    this.eventRegistrationService.getEvents().subscribe({
+    this.coreService.getEvents().subscribe({
       next: (data) => {
         console.log('Events fetched:', data);
         this.events = data;
@@ -54,7 +54,7 @@ export class EventRegistrationComponent {
   }
 
     fetchTicketTypes() {
-    this.eventRegistrationService.getTicketTypes().subscribe({
+    this.coreService.getTicketTypes().subscribe({
       next: (data) => {
         console.log('Ticket types fetched:', data);
         this.ticketTypes = data;
@@ -92,7 +92,7 @@ export class EventRegistrationComponent {
   
     console.log('📤 Sending registration request:', registrationData);
   
-    this.eventRegistrationService.registerEvent(token, registrationData).subscribe({
+    this.coreService.registerEvent(token, registrationData).subscribe({
       next: (response) => {
         console.log('✅ Registration successful:', response);
         this.successMessage = 'Registration successful!';

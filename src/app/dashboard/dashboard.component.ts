@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DashboardService } from '../services/dashboard.service'; 
+import { CoreService } from '../services/core.service'; 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser, faBell, faTachometerAlt, faCalendarAlt, faEdit, faSignOutAlt, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
@@ -26,10 +26,10 @@ export class DashboardComponent implements OnInit {
   registeredEvents: { date: string; event_name: string; location: string; ticket_type: string; ticket_quantity: number }[] = []; // ✅ Fix: Explicit type
   errorMessage: string = '';
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private coreService: CoreService) {}
 
   ngOnInit() {
-    this.dashboardService.getUserDetails().subscribe(
+    this.coreService.getUserDetails().subscribe(
       response => {
         console.log('✅ User Details:', response);
         if (!response || !response.id) {
@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
   loadRegisteredEvents() {
     if (!this.userId) return;
 
-    this.dashboardService.getRegisteredEvents().subscribe(
+    this.coreService.getRegisteredEvents().subscribe(
       response => {
         console.log('✅ Registered Events:', response);
         this.registeredEvents = response.length ? response : []; // ✅ No type error now
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
 
   logout(event: Event) {
     event.preventDefault(); // Prevent the default anchor behavior
-    this.dashboardService.logout(); // Clear the token
+    this.coreService.logout(); // Clear the token
     window.location.href = '../'; // Redirect to login page
   }
   

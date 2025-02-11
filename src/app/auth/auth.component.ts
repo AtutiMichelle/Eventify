@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service'; 
+import { CoreService } from '../services/core.service'; 
 
 @Component({
   selector: 'app-auth',
@@ -20,7 +20,7 @@ export class AuthComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private router: Router, private authService: AuthService) {} 
+  constructor(private router: Router, private coreService: CoreService) {} 
 
   toggleMode() {
     this.container.nativeElement.classList.toggle('sign-up-mode');
@@ -29,7 +29,7 @@ export class AuthComponent {
   }
 
   onLogin() {
-    this.authService.login(this.loginData).subscribe(
+    this.coreService.login(this.loginData).subscribe(
       (response) => {
         const token = response.token;
         if (token) {
@@ -56,7 +56,7 @@ export class AuthComponent {
   onSignup() {
     console.log("📤 Sending signup data:", this.signupData); // Debugging line
   
-    this.authService.signup(this.signupData).subscribe(
+    this.coreService.signup(this.signupData).subscribe(
       (response) => {
         console.log("✅ Signup Success:", response);
         this.successMessage = "Registration successful! Please log in.";
@@ -78,7 +78,7 @@ export class AuthComponent {
   }
   
   fetchUserDetails() {
-    this.authService.fetchUserDetails().subscribe(
+    this.coreService.fetchUserDetails().subscribe(
       (response) => {
         console.log('User Data:', response);
       },

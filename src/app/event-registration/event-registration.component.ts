@@ -8,11 +8,12 @@ import { CoreService } from '../services/core.service'; // Import the service
 @Component({
   selector: 'app-event-registration',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],  // ✅ Ensure this is present
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],  
   templateUrl: './event-registration.component.html',
   styleUrls: ['./event-registration.component.css'],
 })
 export class EventRegistrationComponent {
+
   registrationForm: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
@@ -34,6 +35,10 @@ export class EventRegistrationComponent {
       paymentMethod: ['', Validators.required],
       specialRequests: ['']
     });
+  }
+
+  toggleMode() {
+    this.router.navigate(['/user-dashboard']); // Navigate to Dashboard
   }
 
   ngOnInit() {
@@ -108,7 +113,6 @@ export class EventRegistrationComponent {
         this.errorMessage = error?.error?.message || 'Registration failed. Please try again.';
       }
     });
-  }
-  
+  }  
 }
 

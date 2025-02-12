@@ -1,1 +1,30 @@
-<p>events works!</p>
+<div class="navbar" [class.scrolled]="isScrolled">
+    <div class="logo">Eventify</div>
+        <div class="links">
+            <a href="../#hero" (click)="scrollToSection($event, 'hero')">Home</a>
+            <a href="#about" (click)="scrollToSection($event, 'about')">About</a>
+            <a href="#features" (click)="scrollToSection($event, 'features')">Features</a>
+            <a href="#services" (click)="scrollToSection($event, 'services')">Services</a>
+    <!-- <button class="btn" (click)="navigateToPage()">Get Started</button> -->
+         </div>
+     </div>
+
+<div class="events-container">
+    <h2>Upcoming Developer Events</h2>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  
+    <div class="event-list">
+      <div *ngFor="let event of events" class="event-card">
+        <img src="/images/home1.jpg" class="image" alt="Events" /> <!-- Event poster -->
+          <div class="event-details">
+              <h3>{{ event.name }}</h3>
+              <p><strong>Date:</strong> {{ event.date }}</p>
+              <p><strong>Location:</strong> {{ event.location }}</p>
+              <p><strong>Description:</strong> {{ event.description }}</p>
+          </div>
+      </div>
+  </div>
+</div>

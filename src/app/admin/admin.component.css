@@ -16,10 +16,7 @@
 body {
   background: rgb(219, 219, 219);
 }
-/* .header, .side_navbar{
-  background:linear-gradient(to right, rgba(16,9,63,0.9), rgba(65, 21, 187, 0.9));
-  color: white;
-} */
+
 .header {
   width:100%;
   position: fixed;
@@ -75,12 +72,13 @@ body {
 
 .container {
   /* margin-top: 10px; */
+  width: 98.5vw;
   display: flex;
-  width: 99vw;
   justify-content: flex-start;
   background-color: #fff;
   height: calc(100vh - 60px); 
   right: 0;
+  
 }
 
 /* Side menubar section */
@@ -101,27 +99,7 @@ body {
   background: rgb(227, 227, 226);
 }
 
-.promo_card {
-  width: 100%;
-  color: #fff;
-  margin-top: 10px;
-  border-radius: 8px;
-  padding: 0.5rem 1rem 1rem 3rem;
-  background: linear-gradient(to bottom right, rgba(65, 21, 187, 0.9), rgba(52, 1, 58, 0.9));
-}
 
-.promo_card h1,
-.promo_card span,
-button {
-  margin: 10px;
-}
-
-.promo_card button {
-  display: block;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
 .history_lists {
   display: flex;
@@ -193,7 +171,7 @@ table td {
   color: white;
   transition: background 0.3s ease, transform 0.2s ease;
   border-radius: 5px;
-  margin:30px 1px;
+  margin:15px 1px;
   
 }
 
@@ -229,8 +207,36 @@ table td {
   font-size: 16px;
 }
 
-/* Responsive Design for Small Screens */
-/* Sidebar - Collapsible for Small Screens */
+/* STATISTICAL CARDS */
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .stat-card {
+    background: linear-gradient(to right, #4CAF50, #2E7D32);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .stat-card p {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  
+
+
 @media (max-width: 768px) {
   .side_navbar {
     width: 60px; /* Minimized Sidebar */
@@ -258,7 +264,19 @@ table td {
     width: calc(100% - 60px); /* Full width when sidebar is minimized */
     margin-left: 60px;
   }
+
+  .stats-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-card {
+    width: 80%;
+    margin-bottom: 15px;
+  }
 }
+
+
 
 /* Even Smaller Screens (Mobile) */
 @media (max-width: 480px) {

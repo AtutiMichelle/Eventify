@@ -5,6 +5,8 @@ import { EventRegistrationComponent } from './event-registration/event-registrat
 import { EventVerificationComponent } from './event-verification/event-verification.component';
 import { TagPrintingComponent } from './tag-printing/tag-printing.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EventsComponent } from './events/events.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 export const routes: Routes = [
@@ -14,6 +16,9 @@ export const routes: Routes = [
   { path: 'event-verification', component: EventVerificationComponent },
   { path: 'tag-printing', component: TagPrintingComponent },
   { path: 'user-dashboard', component:DashboardComponent},
+  { path: 'events', component: EventsComponent },
+  { path: 'admin-dashboard', component: AdminComponent}
+
 
 ];
 

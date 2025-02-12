@@ -1,0 +1,102 @@
+<header class="header">
+    <div class="logo">
+      <a href="#">Eventify</a>
+      <!-- <div class="search_box">
+        <input type="text" placeholder="Search Events" />
+        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+      </div> -->
+    </div>
+  
+    <div class="header-icons">
+      <!-- <fa-icon [icon]="faBell"></fa-icon> -->
+      <div class="account">
+        <img src="/images/user2.svg" alt="User Image" />
+        <h4>{{ username }}</h4>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <nav>
+      <div class="side_navbar">
+        <a href="#" class="active">
+          <fa-icon [icon]="faTachometerAlt"></fa-icon> <span>Dashboard</span>
+        </a>
+        <a href="#">
+          <fa-icon [icon]="faUser"></fa-icon> <span>Profile</span>
+        </a>
+        <a href="/events">
+          <fa-icon [icon]="faCalendarAlt"></fa-icon> <span>Events</span>
+        </a>
+        <a href="/event-registration">
+          <fa-icon [icon]="faEdit"></fa-icon> <span>Event Registration</span>
+        </a>
+        <a href="/event-registration">
+            <fa-icon [icon]="faEdit"></fa-icon> <span>Users</span>
+          </a>
+          <a href="/event-registration">
+            <fa-icon [icon]="faEdit"></fa-icon> <span>Add Events</span>
+          </a>
+        <div class="logout">
+          <a href="#" (click)="logout($event)">
+            <fa-icon [icon]="faSignOutAlt"></fa-icon> Logout
+          </a>
+        </div>
+        
+      </div>
+    </nav>
+    
+    <div class="main-body">
+        <h2>Dashboard</h2>
+      
+        <!-- STATISTICAL CARDS -->
+        <div class="stats-container">
+          <div class="stat-card">
+            <h3>Total Users</h3>
+            <p>{{ totalUsers }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Events</h3>
+            <p>{{ totalEvents }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Registered Events</h3>
+            <p>{{ totalRegisteredEvents }}</p>
+          </div>
+        </div>
+      
+        <!-- 5 MOST RECENT USERS -->
+        <div class="history_lists">
+          <div class="list1">
+            <div class="row">
+              <h4>Recent Users</h4>
+              <a href="#">See all</a>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Date Joined</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="!recentUsers || recentUsers.length === 0">
+                  <td colspan="4">No recent users.</td>
+                </tr>
+                <tr *ngFor="let user of recentUsers; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ user?.name || 'N/A' }}</td>
+                  <td>{{ user?.email || 'N/A' }}</td>
+                  <td>{{ user?.date_joined || 'N/A' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  
+  

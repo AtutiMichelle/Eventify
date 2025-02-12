@@ -34,7 +34,7 @@ export class CoreService {
     return this.http.get<any>(`${this.apiUrl}/user`, this.getAuthHeaders());
   }
 
-  //dashboard
+  //user-dashboard
   getUserDetails():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/user`, this.getAuthHeaders());
   }
@@ -55,12 +55,21 @@ export class CoreService {
     return this.http.get<any[]>(`${this.apiUrl}/tickets/ticket-types`);
   }
 
-
   registerEvent(token: string, registrationData: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     });
     return this.http.post<any>(`${this.apiUrl}/register-event`, registrationData, { headers });
+  }
+
+  //admin dashboard
+  getDashboardStats():Observable<any>{
+    return this.http.get(`${this.apiUrl}/admin/dashboard-stats`);
+    
+  }
+
+  getRecentUsers():Observable<any>{
+    return this.http.get(`${this.apiUrl}/admin/recent-users`);
   }
 }

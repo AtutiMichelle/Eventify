@@ -32,14 +32,22 @@ export class AuthComponent {
     this.coreService.login(this.loginData).subscribe(
       (response) => {
         const token = response.token;
+        const usertype = response.usertype;
+  
         if (token) {
           localStorage.setItem('auth_token', token);
           localStorage.setItem('name', this.loginData.name);
+          localStorage.setItem('usertype', usertype); // Store user type
+  
           this.successMessage = 'Login successful!';
           this.errorMessage = '';
-
+  
           setTimeout(() => {
-            this.router.navigate(['/user-dashboard']);
+            if (usertype === 'admin') {
+              this.router.navigate(['/admin-dashboard']);
+            } else {
+              this.router.navigate(['/user-dashboard']);
+            }
           }, 1000);
         } else {
           this.errorMessage = 'Invalid credentials';
@@ -52,6 +60,7 @@ export class AuthComponent {
       }
     );
   }
+  
 
   onSignup() {
     console.log("📤 Sending signup data:", this.signupData); // Debugging line
@@ -84,8 +93,13 @@ export class AuthComponent {
       },
       (error) => {
         console.error('Error:', error);
-        this.errorMessage = 'User not authenticated. Please log in again.';
+        this.errorMessage = 'Session expired. Please log in again.';
+        localStorage.removeItem('auth_token');
+        setTimeout(() => {
+          this.router.navigate(['/register']); // Redirect to login
+        }, 1500);
       }
     );
   }
+  
 }

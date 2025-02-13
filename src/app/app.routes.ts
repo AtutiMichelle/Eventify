@@ -7,6 +7,7 @@ import { TagPrintingComponent } from './tag-printing/tag-printing.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventsComponent } from './events/events.component';
 import { AdminComponent } from './admin/admin.component';
+import { UsersComponent } from './admin/users/users.component';
 
 
 
@@ -18,7 +19,8 @@ export const routes: Routes = [
   { path: 'tag-printing', component: TagPrintingComponent },
   { path: 'user-dashboard', component:DashboardComponent},
   { path: 'events', component: EventsComponent },
-  { path: 'admin-dashboard', component: AdminComponent}
+  { path: 'admin-dashboard', component: AdminComponent},
+  { path: 'users', component: UsersComponent}
   
 
 ];

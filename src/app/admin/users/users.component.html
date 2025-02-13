@@ -1,19 +1,13 @@
-<app-sidebar></app-sidebar>
-    
-    <div class="main-body">
-        <h2>Dashboard</h2>
-        <!-- 5 MOST RECENT USERS -->
-        
+<app-sidebar></app-sidebar>        
              <div class="user-container">
-              <h2>User Details</h2>
+              <h2>Dashboard</h2>
+              <h3>User Details</h3>
+              
 
               <div *ngIf= "errorMessage" class="error-message">
                 {{errorMessage}}
               </div>              
-             </div>
-              
-              
-            </div>
+           
             <table>
               <thead>
                 <tr>
@@ -35,6 +29,7 @@
                 </tr>
               </tbody>
             </table>
-         
+         </div>
+        
   
   

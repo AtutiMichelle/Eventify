@@ -14,67 +14,62 @@ body {
   background: rgb(219, 219, 219);
 }
 
+/* Main Container */
 .container {
-    /* margin-top: 10px; */
-    width: 98.5vw;
-    display: flex;
-    justify-content: flex-start;
-    background-color: #fff;
-    height: calc(100vh - 60px); 
-    right: 0;
-    
-  }
-  
-  /* Side menubar section */
-  
-  
-  /* Main Body Section */
-  .main-body {
-    width: calc(100% - 220px );
-    height: 100vh;
-    margin-top: 53px;
-    left: 0;
-    right: 0;
-    margin-left: 212px;
-    padding-top: 2.5rem;
-    padding-left: 1rem;
-    display: flex;
-    flex-direction: column;
-    background: rgb(227, 227, 226);
-  }
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
 
-  .users-container {
-    width: 80%;
-    margin: 20px auto;
-    text-align: center;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .error-message {
-    color: red;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  
-  
+/* Sidebar */
+app-sidebar {
+  width: 220px; /* Ensure sidebar has a fixed width */
+  flex-shrink: 0;
+  height: 100vh;
+  background-color: #333;
+  color: white;
+}
+
+/* Main Content */
+.user-container {
+  flex-grow: 1;
+  height: 100vh;
+  margin-left: 213px;
+  margin-top: 50px;
+  padding: 20px;
+  background: rgb(227, 227, 226);
+  overflow: auto;
+}
+
+/* Fix Table Layout */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

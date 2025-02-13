@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +73,18 @@ export class CoreService {
 
   getRecentUsers():Observable<any>{
     return this.http.get(`${this.apiUrl}/admin/recent-users`);
+  }
+
+  getAllUsers():Observable<any>{
+    return this.http.get(`${this.apiUrl}/admin/all-users`).pipe(
+      catchError((error) => {
+        console.error('API error:', error);
+        return throwError(() => new Error('Error fetching users'));
+      })
+    );
+  }
+
+  searchUsers(query:string):Observable<any>{
+    return this.http.get(`${this.apiUrl}/search-users?search=${query}`);
   }
 }

@@ -8,7 +8,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { response } from 'express';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-user',
   standalone:true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule,SidebarComponent],
   templateUrl: './users.component.html',
@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
     }
 
       fetchUserDetails(){
-        this.coreService.getUserDetails().subscribe({
+        this.coreService.getAllUsers().subscribe({
           next:(response)=>{
             console.log('Users',response);
             if(Array.isArray(response)){

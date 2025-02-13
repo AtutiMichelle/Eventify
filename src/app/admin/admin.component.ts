@@ -4,10 +4,12 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { CoreService } from '../services/core.service'; 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser, faBell, faTachometerAlt, faCalendarAlt, faEdit, faSignOutAlt, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-admin',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule],
+  standalone:true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, SidebarComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -64,7 +66,7 @@ export class AdminComponent implements OnInit {
     this.coreService.getRegisteredEvents().subscribe(
       response => {
         console.log('✅ Registered Events:', response);
-        this.registeredEvents = response.length ? response : []; // ✅ No type error now
+        this.registeredEvents = response.length ? response : []; 
       },
       error => {
         console.error('❌ Error loading events:', error);
@@ -74,9 +76,9 @@ export class AdminComponent implements OnInit {
   }
 
   logout(event: Event) {
-    event.preventDefault(); // Prevent the default anchor behavior
-    this.coreService.logout(); // Clear the token
-    window.location.href = '../'; // Redirect to login page
+    event.preventDefault(); 
+    this.coreService.logout(); 
+    window.location.href = '../'; 
   }
 
   fetchDashboardStats(){

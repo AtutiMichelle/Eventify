@@ -9,6 +9,7 @@ import { EventsComponent } from './events/events.component';
 import { AdminComponent } from './admin/admin.component';
 
 
+
 export const routes: Routes = [
   { path: '', component: HomepageComponent},
   { path: 'register', component: AuthComponent },
@@ -18,7 +19,7 @@ export const routes: Routes = [
   { path: 'user-dashboard', component:DashboardComponent},
   { path: 'events', component: EventsComponent },
   { path: 'admin-dashboard', component: AdminComponent}
-
+  
 
 ];
 

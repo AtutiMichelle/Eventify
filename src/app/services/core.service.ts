@@ -96,14 +96,13 @@ export class CoreService {
   }
 
   deleteUser(userId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/admin/delete-user/${userId}`).pipe(
-      catchError((error) => {
-        console.error('API error:', error);
-        return throwError(() => new Error('Error deleting user'));
-      })
-    );
+    return this.http.delete(`${this.apiUrl}/admin/users/${userId}`);
   }
-  
+
+  updateUser(userId: number, userData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/admin/users/${userId}`, userData);
+  }
+   
   
   
 }

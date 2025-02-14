@@ -1,44 +1,25 @@
-<app-sidebar></app-sidebar>        
-             <div class="user-container">
-              <h2>Dashboard</h2>
-              <h3>User Details</h3>
-              
-              <div class="search-container">
-                <input type="text" [(ngModel)]="searchQuery" placeholder="Search">
-                <button (click)="searchUsers()">Search</button>
-              </div>
-              <div *ngIf= "errorMessage" class="error-message">
-                {{errorMessage}}
-              </div>              
-           
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Date Joined</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngIf="!users || users.length === 0">
-                  <td colspan="4">No recent users.</td>
-                </tr>
-                <tr *ngFor="let user of users; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ user?.name || 'N/A' }}</td>
-                  <td>{{ user?.email || 'N/A' }}</td>
-                  <td>{{ user?.date_joined || 'N/A' }}</td>
-               
-                <td>
-                  <button class="update-btn" (click)="updateUser(user)">✏️ Update</button>
-                  <button class="delete-btn" (click)="deleteUser(user.id)">🗑 Delete</button>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-         </div>
-        
-  
-  
+<app-sidebar></app-sidebar>    
+
+<div class="user-container">
+  <h2>Dashboard</h2>
+  <h3>User Details</h3>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search">
+    <button (click)="searchUsers()">Search</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>    
+
+  <!-- Reusable Table Component -->
+  <app-table 
+    [columns]="columns" 
+    [data]="users" 
+    [actions]="true"
+    (edit)="updateUser($event)"
+    (delete)="deleteUser($event)">
+  </app-table>
+</div>

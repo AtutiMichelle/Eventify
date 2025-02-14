@@ -84,7 +84,26 @@ export class CoreService {
     );
   }
 
-  searchUsers(query:string):Observable<any>{
-    return this.http.get(`${this.apiUrl}/search-users?search=${query}`);
+  searchUsers(query: string): Observable<any> {
+    console.log('🔍 Searching for:', query); // Debugging log
+  
+    return this.http.get<any>(`${this.apiUrl}/admin/search-users?search=${query}`).pipe(
+      catchError((error) => {
+        console.error('❌ API error:', error);
+        return throwError(() => new Error('Error searching users'));
+      })
+    );
   }
+
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/admin/delete-user/${userId}`).pipe(
+      catchError((error) => {
+        console.error('API error:', error);
+        return throwError(() => new Error('Error deleting user'));
+      })
+    );
+  }
+  
+  
+  
 }

@@ -1,0 +1,15 @@
+<app-sidebar></app-sidebar>
+
+<div class="container">
+<app-table 
+  [columns]="columns" 
+  [data]="events"
+  [actions]="true"
+  (search)="onSearch($event)"
+  (updated)="loadEvents()"  
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)">
+  
+</app-table>
+
+</div>

@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventsComponent } from './events/events.component';
 import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './admin/users/users.component';
+import { CRUDEventsComponent } from './admin/crud-events/crud-events.component';
 
 
 
@@ -20,7 +21,8 @@ export const routes: Routes = [
   { path: 'user-dashboard', component:DashboardComponent},
   { path: 'events', component: EventsComponent },
   { path: 'admin-dashboard', component: AdminComponent},
-  { path: 'users', component: UsersComponent}
+  { path: 'users', component: UsersComponent},
+  { path: 'events-CRUD', component: CRUDEventsComponent}
   
 
 ];

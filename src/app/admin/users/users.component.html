@@ -4,12 +4,6 @@
   <h2>Dashboard</h2>
   <h3>User Details</h3>
 
-  <!-- Search Bar -->
-  <div class="search-container">
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Search">
-    <button (click)="searchUsers()">Search</button>
-  </div>
-
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>    
@@ -18,7 +12,8 @@
   <app-table 
     [columns]="columns" 
     [data]="users" 
-    [actions]="true"
+    [actions]="true"   
+    (search)="onSearch($event)"
     (edit)="updateUser($event)"
     (delete)="deleteUser($event)">
   </app-table>

@@ -83,7 +83,7 @@ export class CoreService {
       })
     );
   }
-
+//search querries
   searchUsers(query: string): Observable<any> {
     console.log('🔍 Searching for:', query); // Debugging log
   
@@ -91,6 +91,16 @@ export class CoreService {
       catchError((error) => {
         console.error('❌ API error:', error);
         return throwError(() => new Error('Error searching users'));
+      })
+    );
+  }
+  searchEvents(query: string): Observable<any> {
+    console.log('🔍 Searching for:', query); // Debugging log
+  
+    return this.http.get<any>(`${this.apiUrl}/search-events?search=${query}`).pipe(
+      catchError((error) => {
+        console.error('❌ API error:', error);
+        return throwError(() => new Error('Error searching events'));
       })
     );
   }
@@ -102,7 +112,16 @@ export class CoreService {
   updateUser(userId: number, userData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/admin/users/${userId}`, userData);
   }
-   
-  
-  
+
+  createEvent(eventData:any):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/events`,eventData);
+  }
+
+  updateEvent(id: number, eventData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/events/${id}`, eventData);
+  }
+
+  deleteEvent(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/events/${id}`);
+  }
 }

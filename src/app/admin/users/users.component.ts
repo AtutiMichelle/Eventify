@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreService } from '../../services/core.service';
@@ -13,15 +13,16 @@ import { TableComponent } from '../table/table.component';
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, SidebarComponent, TableComponent],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
   users: any[] = [];
   columns: string[] = ['ID', 'Name', 'Email', 'Date Joined'];
   errorMessage: string = '';
   searchQuery: string = '';
+  isDeleting: boolean = false;
 
-  constructor(private coreService: CoreService, private router: Router) {} // 🚀 Inject Router
+  constructor(private coreService: CoreService, private router: Router, private cdr: ChangeDetectorRef) {} // 🚀 Inject Router
 
   ngOnInit() {
     this.fetchUserDetails();
@@ -33,33 +34,34 @@ export class UsersComponent implements OnInit {
         console.log('Users:', response);
         if (Array.isArray(response)) {
           this.users = response;
+          this.cdr.detectChanges();
         } else {
           console.error('❌ Expected an array but got:', response);
           this.users = [];
+          this.cdr.detectChanges();
         }
       },
       error: (err) => {
         console.error('Error fetching users', err);
         this.errorMessage = 'Error fetching user details';
-        this.users = []; // ⚠️ This line clears users on error
+        this.users = []; 
       }
     });
   }
   
 
-  searchUsers() {
-    if (!this.searchQuery.trim()) {
-      this.fetchUserDetails();
+  onSearch(query: string) {
+    if (!query.trim()) {
+      this.fetchUserDetails(); 
       return;
     }
 
-    this.coreService.searchUsers(this.searchQuery).subscribe({
+    this.coreService.searchUsers(query).subscribe({
       next: (response) => {
         console.log('Search Results:', response);
         if (Array.isArray(response)) {
-          this.users = response;
-        } else if (response) {
-          this.users = [response];
+          this.users = [...response];
+          this.cdr.detectChanges();
         } else {
           this.users = [];
         }
@@ -71,23 +73,35 @@ export class UsersComponent implements OnInit {
     });
   }
 
+
   updateUser(user: any) {
     console.log('Editing user:', user);
     this.router.navigate(['/edit-user', user.id]);
   }
 
   deleteUser(userId: number) {
+    // Disable the delete button to prevent multiple clicks
+    this.isDeleting = true;
+  
     if (confirm('Are you sure you want to delete this user?')) {
       this.coreService.deleteUser(userId).subscribe({
         next: () => {
           console.log(`✅ User with ID ${userId} deleted successfully.`);
-          this.fetchUserDetails();
+          this.fetchUserDetails();  // Fetch the updated list of users
         },
         error: (err) => {
           console.error('❌ Error deleting user:', err);
           this.errorMessage = 'Error deleting user';
+        },
+        complete: () => {
+          // Re-enable the button once the request is complete
+          this.isDeleting = false;
         }
       });
+    } else {
+      // If the user cancels the confirmation, re-enable the button
+      this.isDeleting = false;
     }
   }
+  
 }

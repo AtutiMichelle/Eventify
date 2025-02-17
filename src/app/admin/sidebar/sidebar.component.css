@@ -85,12 +85,12 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-     padding: 8px 15px; 
-    font-size: 16px;
+     padding: 5px 15px; 
+    font-size: 14px;
     color: white;
     transition: background 0.3s ease, transform 0.2s ease;
-    border-radius: 5px;
-    margin:5px 1px;
+    /* border-radius: 5px; */
+    margin:1px 1px;
     
   }
   
@@ -101,14 +101,14 @@ body {
   }
   
   .side_navbar a:not(:last-child) {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    /* border-bottom: 2px solid rgba(255, 255, 255, 0.15); */
   }
   
   /* Active Link */
   .side_navbar .active {
     background: rgba(255, 255, 255, 0.3);
     font-weight: bold;
-    border-left: 4px solid white;
+    border-right: 4px solid white;
   }
   
   

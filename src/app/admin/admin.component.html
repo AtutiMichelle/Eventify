@@ -1,72 +1,77 @@
 <app-sidebar></app-sidebar> 
-    
-    <div class="main-body">
-        <h2>Dashboard</h2>
-      
-        <!-- STATISTICAL CARDS -->
-        <div class="stats-container">
-          <div class="stat-card">
-            <div class="stat-content">
-            <h3>Total Users</h3>
-          </div>
-            <p>{{ totalUsers }}</p>
-            <div>
-            <fa-icon [icon]="faUser"></fa-icon>
-          </div>
-          </div>
 
-          <div class="stat-card">
-            <div class="stat-content">
-            <h3>Total Events</h3>
-          </div>  
-            <p>{{ totalEvents }}</p>
-            <div>
-            <fa-icon [icon]="faCalendarAlt"></fa-icon> 
-          </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-content">
-            <h3>Registered Events</h3>  
-          </div>         
-            <p>{{ totalRegisteredEvents }}</p>
-            <div>
-            <fa-icon [icon]="faEdit"></fa-icon>
-          </div>
-          </div>
-        </div>
-      
-        <!-- 5 MOST RECENT USERS -->
-        <div class="history_lists">
-          <div class="list1">
-            <div class="row">
-              <h4>Recent Users</h4>
-              <a href="#">See all</a>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Date Joined</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngIf="!recentUsers || recentUsers.length === 0">
-                  <td colspan="4">No recent users.</td>
-                </tr>
-                <tr *ngFor="let user of recentUsers; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ user?.name || 'N/A' }}</td>
-                  <td>{{ user?.email || 'N/A' }}</td>
-                  <td>{{ user?.date_joined || 'N/A' }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+<div class="main-body">
+  
+  <!-- STATISTICAL CARDS -->
+  <div class="stats-container">
+    <div class="stat-card card-users">
+      <div class="stat-content">
+        <h3>Total Users</h3>
       </div>
-      
-   
+      <p>{{ totalUsers }}</p>
+      <div>
+        <fa-icon [icon]="faUser"></fa-icon>
+      </div>
+    </div>
   
+    <div class="stat-card card-events">
+      <div class="stat-content">
+        <h3>Total Events</h3>
+      </div>  
+      <p>{{ totalEvents }}</p>
+      <div>
+        <fa-icon [icon]="faCalendarAlt"></fa-icon> 
+      </div>
+    </div>
   
+    <div class="stat-card card-registered">
+      <div class="stat-content">
+        <h3>Registered Events</h3>  
+      </div>         
+      <p>{{ totalRegisteredEvents }}</p>
+      <div>
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Flex container for Canceled Registrations & Donut Chart -->
+  <div class="stats-row">
+    
+    <!-- Canceled Registrations -->
+    <div class="canceled-registrations-container">
+      <h3>Canceled Registrations</h3>
+      <app-table 
+        [columns]="tableColumns" 
+        [data]="canceledRegistrations"
+        [showSearch]="false">
+      </app-table>
+    </div>
+
+    <!-- Donut Chart -->
+    <div class="chart-container">
+      <h3>Ticket Sales Distribution</h3>
+      <ngx-charts-pie-chart
+        [results]="donutChartData"
+        [legend]="true"
+        [labels]="true"
+        [doughnut]="true"
+        [animations]="true"
+        [scheme]="colorScheme">
+      </ngx-charts-pie-chart>
+    </div>
+
+  </div>
+
+  <!-- Recent Users Section -->
+  <div class="recent-users-container">
+    <h3>Recent Users</h3>
+    <app-table 
+      [columns]="tableColumnsRecentUsers" 
+      [data]="recentUsers"
+      [showSearch]="false">
+    </app-table>
+  </div>
+
+</div>

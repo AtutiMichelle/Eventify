@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { CoreService } from '../../services/core.service'; 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser, faBell, faTachometerAlt, faCalendarAlt, faEdit, faSignOutAlt, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faDrupal } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,6 +23,7 @@ export class SidebarComponent implements OnInit {
   faEdit = faEdit;
   faSignOutAlt = faSignOutAlt;
   faMagnifyingGlass = faMagnifyingGlass;
+  faDrupal = faDrupal;
 
 
   username: string = '';

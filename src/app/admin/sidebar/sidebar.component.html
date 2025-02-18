@@ -1,14 +1,8 @@
-<header class="header">
-    <div class="logo">
-      <a href="#">Eventify</a>
-      <!-- <div class="search_box">
-        <input type="text" placeholder="Search Events" />
-        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-      </div> -->
-    </div>
-  
+<header class="header">  
     <div class="header-icons">
-      <!-- <fa-icon [icon]="faBell"></fa-icon> -->
+     <div class="dashboard-heading">
+      <h3>Dashboard</h3>
+     </div>
       <div class="account">
         <img src="/images/user2.svg" alt="User Image" />
         <h4>{{ username }}</h4>
@@ -19,29 +13,40 @@
   <div class="container">
     <nav>
       <div class="side_navbar">
-        <a href="#" class="active">
-          <fa-icon [icon]="faTachometerAlt"></fa-icon> <span>Dashboard</span>
-        </a>
-        <a href="#">
-          <fa-icon [icon]="faUser"></fa-icon> <span>Profile</span>
-        </a>
-        <a href="/events">
-          <fa-icon [icon]="faCalendarAlt"></fa-icon> <span>Events</span>
-        </a>
-        <a href="/event-registration">
-          <fa-icon [icon]="faEdit"></fa-icon> <span>Event Registration</span>
-        </a>
-        <a href="/users">
-            <fa-icon [icon]="faEdit"></fa-icon> <span>Users</span>
+
+        <div class="logo">
+          <fa-icon [icon]="faDrupal"></fa-icon>
+          <a href="#">Eventify</a>
+          
+        </div>
+        <div class="sidebar-links">
+          <a href="#" class="active">
+            <fa-icon [icon]="faTachometerAlt"></fa-icon> <span>Dashboard</span>
+          </a>
+          <a href="#">
+            <fa-icon [icon]="faUser"></fa-icon> <span>My Profile</span>
+          </a>
+          <a href="/events">
+            <fa-icon [icon]="faCalendarAlt"></fa-icon> <span>Browse Events</span>
+          </a>
+          <a href="/event-registration">
+            <fa-icon [icon]="faEdit"></fa-icon> <span>Register for Events</span>
+          </a>
+          <a href="/users">
+            <fa-icon [icon]="faUser"></fa-icon> <span>Manage Users</span>
           </a>
           <a href="/events-CRUD">
-            <fa-icon [icon]="faEdit"></fa-icon> <span>CRUD Events</span>
+            <fa-icon [icon]="faEdit"></fa-icon> <span>Event Management</span>
           </a>
+          <a href="/CRUD-event-registrations">
+            <fa-icon [icon]="faEdit"></fa-icon> <span>Registration Records</span>
+          </a>
+        </div>
         <div class="logout">
           <a href="#" (click)="logout($event)">
             <fa-icon [icon]="faSignOutAlt"></fa-icon> Logout
           </a>
         </div>
         
-      </div>
+     </div>
     </nav>

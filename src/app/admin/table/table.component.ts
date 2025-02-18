@@ -16,6 +16,8 @@ export class TableComponent {
   @Input() data: any[] = [];
   @Input() actions: boolean = false;
   @Input() searchQuery:string='';
+  @Input() showSearch: boolean = false; // Default is false (search hidden)
+
 
   @Output() updated = new EventEmitter<void>();
   @Output() edit = new EventEmitter<any>();

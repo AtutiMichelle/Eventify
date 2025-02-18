@@ -1,0 +1,16 @@
+<app-sidebar></app-sidebar>
+<div class="container">
+<h2>Manage Event Registrations</h2>
+
+<app-table 
+  [columns]="columns" 
+  [data]="data" 
+  [actions]="true" 
+  [searchQuery]="searchQuery"
+  (updated)="fetchEventRegistrations()" 
+  (edit)="onEdit($event)" 
+  (delete)="onDelete($event)"
+  [showSearch]="true" 
+  (search)="onSearch($event)">
+</app-table>
+</div>

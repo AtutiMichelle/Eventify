@@ -124,4 +124,43 @@ export class CoreService {
   deleteEvent(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/events/${id}`);
   }
+
+  getEventRegistrations(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/event-registrations`);
+  }
+
+  searchEventRegistrations(query: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/event-registrations/search?query=${query}`);
+  }
+
+  updateEventRegistration(id: number, updatedData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/event-registrations/${id}`, updatedData);
+  }
+
+  deleteEventRegistration(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/event-registrations/${id}`);
+  }
+
+  getEventById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/events/${id}`);
+  }
+
+  getTicketSalesDistribution(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/admin/ticket-sales-distribution`);
+  }
+
+  getCancelledEvents(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/admin/cancelled-events`);
+  }
+
+  getCanceledRegistrations() {
+    return this.http.get<any[]>(`${this.apiUrl}/admin/canceled-registrations`);
+}
+
+
+  cancelRegistration(id: number, reason: string) {
+    return this.http.post<any>(`${this.apiUrl}/admin/cancel-registration`, { id, reason });
+}
+
+  
 }

@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="forms-container">
+    <div class="signin-signup">
+      <div class="event-details-form">
+        <h2 class="title">{{ event.name }}</h2>
+
+        <!-- Event Description -->
+        <div class="event-description">
+          <p><strong>Description:</strong> {{ event.description }}</p>
+          <p><strong>Location:</strong> {{ event.location }}</p>
+          <p><strong>Date:</strong> {{ event.date | date: 'mediumDate' }}</p>
+          <p><strong>Time:</strong> {{ event.time }}</p>
+          <p><strong>Organizer:</strong> {{ event.organizer }}</p>
+          <p><strong>Capacity:</strong> {{ event.capacity }}</p>
+          <p><strong>Status:</strong> {{ event.status }}</p>
+        </div>
+
+        <!-- Register Button -->
+        <button class="btn solid" (click)="registerForEvent()">Register for Event</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>Welcome to Eventify</h3>
+        <p>Explore cutting-edge events designed to enhance your experience – register now and be part of the digital revolution!</p>
+      </div>
+      <img src="/images/event_reg.svg" class="image" alt="Events" />
+    </div>
+  </div>
+</div>

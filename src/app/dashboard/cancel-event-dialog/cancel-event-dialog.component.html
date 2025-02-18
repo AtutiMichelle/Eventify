@@ -1,0 +1,5 @@
+<h2>Cancel Event</h2>
+<p>Why are you canceling this event?</p>
+<textarea [(ngModel)]="cancellationReason" placeholder="Enter reason"></textarea>
+<button (click)="confirmCancellation()">Confirm</button>
+<button (click)="close()">Close</button>

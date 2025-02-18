@@ -64,6 +64,7 @@
               <th>Event Location</th>
               <th>Ticket Type</th>
               <th>Ticket Quantity</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -80,6 +81,10 @@
               <td>{{ eventReg?.location || 'Not Specified' }}</td>
               <td>{{ eventReg?.ticket_type || 'General' }}</td>
               <td>{{ eventReg?.ticket_quantity || 1 }}</td>
+              <td>
+                <button (click)="cancelRegistration(eventReg.id)">Cancel</button>
+            </td>
+              
             </tr>
           </tbody>
         </table>

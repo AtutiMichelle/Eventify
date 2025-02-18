@@ -36,10 +36,14 @@ app-sidebar {
   flex-grow: 1;
   height: 100vh;
   margin-left: 213px;
-  margin-top: 50px;
+  margin-top: 70px;
   padding: 20px;
   background: rgb(227, 227, 226);
   overflow: auto;
+}
+
+.user-container h3{
+  align-items: center;
 }
 
 /* Fix Table Layout */

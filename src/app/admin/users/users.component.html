@@ -1,7 +1,7 @@
 <app-sidebar></app-sidebar>    
 
 <div class="user-container">
-  <h2>Dashboard</h2>
+ 
   <h3>User Details</h3>
 
   <div *ngIf="errorMessage" class="error-message">
@@ -15,6 +15,7 @@
     [actions]="true"   
     (search)="onSearch($event)"
     (edit)="updateUser($event)"
+    [showSearch]="true"
     (delete)="deleteUser($event)">
   </app-table>
 </div>

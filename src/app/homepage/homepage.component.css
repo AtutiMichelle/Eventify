@@ -6,7 +6,7 @@
 body,
 input,
 select {
-      font-family: "Times New Roman", Times, serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 html {
@@ -20,49 +20,55 @@ section{
 
  .navbar {
     position: fixed;
-    top: 0;
-    width: 100%;
+    top: 20px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 90%;
+    max-width: 1200px;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 25px 20px;
-    background: transparent; /* Transparent initially */
-    transition: background 0.3s ease-in-out; /* Smooth transition */
+    /* background: rgb(255, 255, 255, 0.7);  */
+    background: linear-gradient(-45deg, #1E89DA 40%, #AA4DF0 60%);
+    backdrop-filter: blur(15px);
+    border-radius: 30px; 
+    transition: all 0.3s ease-in-out;
 }
 
+/* When scrolled, navbar becomes more solid */
 .navbar.scrolled {
-    background: linear-gradient(to right, rgba(16, 9, 63, 0.9), rgba(52, 1, 58, 0.9), rgba(112, 65, 242, 0.9)); /* Solid background on scroll */
-    backdrop-filter: blur(10px); /* Slight blur effect */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    background: rgb(255, 255, 255); 
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    top: 20px; /* Moves up to touch the top */
+    width: 100%; /* Full width when scrolling */
+    border-radius: 30px; /* Remove rounded corners */
 }
 
-
-
-.logo{
-    font-size: 1.7rem;
-    font-weight: bold;
-    color: aliceblue;
-}
-
-.links{
+/* Style for navbar links */
+.links {
     display: flex;
-    margin-left: auto;
-    gap: 70px;
-    margin-right: 70px;
+    gap: 50px;
 }
 
-.links a{
+.links a {
     text-decoration: none;
-    color: aliceblue;
-    font-size: 1.4rem;
+    color: #000000 ;
+    font-size: 1.5rem;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.links a:hover{
-    color: blue;
+.links a:hover {
+    color: #ffffff;
 }
+
+.logo {
+    font-size: 1.6rem;
+}
+
 
 /* .btn {
     width: 150px;
@@ -83,58 +89,45 @@ section{
     background-color: #4d84e2;
  } */
 
- 
  #hero {
     position: relative;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-}
-
-#hero::before {
-    content: "";
-    position: absolute;
-    inset: 0; /* Covers entire #hero */
-    background: url('/images/home3.jpg') center/cover no-repeat;
-    transform: scaleX(-1);
-}
-
-
-.hero-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;  /* Ensure the image stays behind the text */
-}
-
-.hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(2px);  /* Blurring the image */
+    /* background: linear-gradient(-45deg, #7074F4 40%, #d2e0d3 60%); */
+    background: linear-gradient(45deg, #1E89DA 40%, #AA4DF0 60%);
+    padding: 0 10%;
+    transform: scale(1.2);
 }
 
 .hero-content {
-    position: absolute;
-    left: 10%;
-    color: white;
-    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.hero-text {
+    flex: 1.1; 
+    color: rgb(0, 0, 0);
     text-align: left;
+    max-width: 600px;
+    line-height: 1.5;
 }
 
 .hero-text h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
+    /* margin-left: -40px; */
 }
 
 .hero-text p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 20px;
+    /* margin-left: -40px; */
 }
 
 .hero-text .btn {
@@ -153,9 +146,44 @@ section{
     background-color: #4d84e2;
 }
 
+/* Right side (SVG) */
+.hero-image {
+    flex: 0.9; /* Makes the right side take less space */
+    display: flex;
+    margin-top: 80px;
+    justify-content: center;
+}
+
+.hero-image img {
+    width: 90%;
+    max-width: 350px;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    /* background: linear-gradient(135deg, #7074F4, #4d84e2); */
+    background-color: #9e71d8;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 20px;
+    /* text-transform: uppercase; */
+    /* letter-spacing: 1px; */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+
+.hero-badge i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+
 
 #about {
-    padding: 60px 10%;
+    padding: 80px 10%;
     background-color: #f9f9f9;
     height: 100vh;
     text-align: center;

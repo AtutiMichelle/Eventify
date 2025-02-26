@@ -16,13 +16,14 @@ export class TableComponent {
   @Input() data: any[] = [];
   @Input() actions: boolean = false;
   @Input() searchQuery:string='';
-  @Input() showSearch: boolean = false; // Default is false (search hidden)
-
+  @Input() showSearch: boolean = false; 
+  @Input() showCancelButton: boolean=false;
 
   @Output() updated = new EventEmitter<void>();
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<number>();
   @Output() search =new EventEmitter<string>();
+  @Output() cancelEvent = new EventEmitter<number>();
 
   editingRow: any = null;
   editedData: any = {};
@@ -122,6 +123,8 @@ deleteRow(id: number) {
   cancelEdit() {
     this.editingRow = null;
   }
-
+  onCancel(eventId: number) {
+    this.cancelEvent.emit(eventId); // Notify parent component
+  }
 } 
 

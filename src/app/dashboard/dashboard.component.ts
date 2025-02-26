@@ -6,11 +6,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser, faBell, faTachometerAlt, faCalendarAlt, faEdit, faSignOutAlt, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { CancelEventDialogComponent } from './cancel-event-dialog/cancel-event-dialog.component';
+import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
+import { TableComponent } from '../admin/table/table.component';
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule,UserSidebarComponent, TableComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
@@ -28,6 +30,8 @@ export class DashboardComponent implements OnInit {
   userId: number | null = null;
   registeredEvents: {id: number; date: string; event_name: string; location: string; ticket_type: string; ticket_quantity: number }[] = []; // ✅ Fix: Explicit type
   errorMessage: string = '';
+
+  tableColumns = ['date', 'event_name', 'location', 'ticket_type', 'ticket_quantity'];
 
   constructor(private coreService: CoreService, private dialog: MatDialog) {}
 
@@ -48,6 +52,8 @@ export class DashboardComponent implements OnInit {
         this.errorMessage = 'Error fetching user details. Please log in again.';
       }
     );
+
+    
   }
 
   loadRegisteredEvents() {
@@ -65,7 +71,7 @@ export class DashboardComponent implements OnInit {
 
         // 🔹 Ensure each event has an ID
         this.registeredEvents = response.map(event => {
-            if (!event.id) {
+            if (!event.registration_id) {
                 console.error("❌ Missing ID in event:", event); // Debug log for missing IDs
             }
 
@@ -97,25 +103,25 @@ export class DashboardComponent implements OnInit {
 
   cancelRegistration(id: number) {
     if (!id) {
-        console.error("❌ Error: id is undefined before sending request"); // 🔹 Debugging
-        return;
+      console.error("❌ Error: id is undefined before sending request");
+      return;
     }
-
+  
     const reason = prompt("Enter cancellation reason:");
-    if (!reason) return; // User canceled input
-
-    console.log("📡 Sending to API:", { id, reason }); // 🔹 Debug log
-
+    if (!reason) return;
+  
+    console.log("📡 Sending to API:", { id, reason });
+  
     this.coreService.cancelRegistration(id, reason).subscribe({
-        next: response => {
-            alert("✅ Registration cancelled successfully!");
-            this.registeredEvents = this.registeredEvents.filter(event => event.id !== id); // ✅ Remove from UI
-        },
-        error: err => {
-            console.error("❌ Error cancelling registration:", err);
-            alert("❌ Failed to cancel registration: " + err.message);
-        }
+      next: () => {
+        alert("✅ Registration cancelled successfully!");
+        this.registeredEvents = this.registeredEvents.filter(event => event.id !== id);
+      },
+      error: err => {
+        console.error("❌ Error cancelling registration:", err);
+        alert("❌ Failed to cancel registration: " + err.message);
+      }
     });
-}
-
+  }
+  
 }

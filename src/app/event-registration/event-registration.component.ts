@@ -35,7 +35,7 @@ export class EventRegistrationComponent implements OnInit {
       ticketQuantity: ['1', [Validators.required, Validators.min(1)]],
       paymentMethod: ['', Validators.required],
       specialRequests: [''],
-      verificationCode: ['', Validators.required]  
+      verificationCode: ['']  
     });
 
     if (this.router.getCurrentNavigation()?.extras.state?.['event']) {

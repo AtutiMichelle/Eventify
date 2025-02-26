@@ -22,8 +22,10 @@
             <td *ngIf="actions">
               <button (click)="editRow(row)">Edit</button>
               <button (click)="deleteRow(row.id)">Delete</button>
+              <!-- <button (click)="onCancel(row.id)">Cancel</button>  -->
+                <button *ngIf="showCancelButton" (click)="onCancel(row.id)">Cancel</button> 
             </td>
-          </ng-container>
+          </ng-container> 
   
           <ng-template #editMode>
             <td *ngFor="let column of columns">
@@ -32,7 +34,9 @@
             <td *ngIf="actions">
               <button (click)="saveEdit()">Save</button>
               <button (click)="cancelEdit()">Cancel</button>
+              
             </td>
+            
           </ng-template>
         </tr>
       </tbody>

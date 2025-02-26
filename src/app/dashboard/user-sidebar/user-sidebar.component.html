@@ -1,0 +1,44 @@
+<header class="header">  
+    <div class="header-icons">
+     <div class="dashboard-heading">
+      <h3>Dashboard</h3>
+     </div>
+      <div class="account">
+        <img src="/images/user2.svg" alt="User Image" />
+        <h4>{{ username }}</h4>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <nav>
+      <div class="side_navbar">
+
+        <div class="logo">
+          <fa-icon [icon]="faDrupal"></fa-icon>
+          <a href="#">Eventify</a>
+          
+        </div>
+        <div class="sidebar-links">
+            <a href="#" class="active">
+                <fa-icon [icon]="faTachometerAlt"></fa-icon> <span>Dashboard</span>
+              </a>
+              <a href="#">
+                <fa-icon [icon]="faUser"></fa-icon> <span>Profile</span>
+              </a>
+              <a href="/events">
+                <fa-icon [icon]="faCalendarAlt"></fa-icon> <span>Events</span>
+              </a>
+              <a href="/event-registration">
+                <fa-icon [icon]="faEdit"></fa-icon> <span>Event Registration</span>
+              </a>
+        
+              <div class="logout">
+                <a href="#" (click)="logout($event)">
+                  <fa-icon [icon]="faSignOutAlt"></fa-icon> Logout
+                </a>
+              </div>
+              </div>
+        
+     </div>
+    </nav>

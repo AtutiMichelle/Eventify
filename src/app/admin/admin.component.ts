@@ -37,13 +37,14 @@ export class AdminComponent implements OnInit {
   totalRegisteredEvents: number = 0;
   recentUsers: any[] = [];
   cancelledEvents: any[] = [];
-  tableColumns = ['ID', 'User Name', 'Event Name', 'Reason', 'Cancelled At']; // ✅ Column Headers
+  tableColumns = ['id', 'user_name', 'event_name', 'reason', 'cancelled_at'];
+
   canceledRegistrations: any[] = [];
   tableColumnsRecentUsers: string[] = ['Name', 'Email', 'Date Joined'];
   colorScheme: Color = {
     name: 'custom',
     selectable: true,
-    group: ScaleType.Ordinal,  // 👀 Make sure this is correctly imported
+    group: ScaleType.Ordinal,  
     domain: ['#1E89DA', '#AA4DF0', '#B0C4B1']
   };
   

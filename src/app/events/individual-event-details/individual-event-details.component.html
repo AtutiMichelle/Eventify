@@ -2,17 +2,17 @@
   <div class="forms-container">
     <div class="signin-signup">
       <div class="event-details-form">
-        <h2 class="title">{{ event.name }}</h2>
+        <h2 class="title">{{ event?.name }}</h2>
 
         <!-- Event Description -->
         <div class="event-description">
-          <p><strong>Description:</strong> {{ event.description }}</p>
-          <p><strong>Location:</strong> {{ event.location }}</p>
-          <p><strong>Date:</strong> {{ event.date | date: 'mediumDate' }}</p>
-          <p><strong>Time:</strong> {{ event.time }}</p>
-          <p><strong>Organizer:</strong> {{ event.organizer }}</p>
-          <p><strong>Capacity:</strong> {{ event.capacity }}</p>
-          <p><strong>Status:</strong> {{ event.status }}</p>
+          <p><strong>Description:</strong> {{ event?.description }}</p>
+          <p><strong>Location:</strong> {{ event?.location }}</p>
+          <p><strong>Date:</strong> {{ event?.date | date: 'mediumDate' }}</p>
+          <p><strong>Time:</strong> {{ event?.time }}</p>
+          <p><strong>Organizer:</strong> {{ event?.organizer }}</p>
+          <p><strong>Capacity:</strong> {{ event?.capacity }}</p>
+          <p><strong>Status:</strong> {{ event?.status }}</p>
         </div>
 
         <!-- Register Button -->

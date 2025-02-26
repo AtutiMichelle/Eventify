@@ -1,49 +1,8 @@
-<header class="header">
-  <div class="logo">
-    <a href="#">Eventify</a>
-    <!-- <div class="search_box">
-      <input type="text" placeholder="Search Events" />
-      <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-    </div> -->
-  </div>
-
-  <div class="header-icons">
-    <!-- <fa-icon [icon]="faBell"></fa-icon> -->
-    <div class="account">
-      <img src="/images/user2.svg" alt="User Image" />
-      <h4>{{ username }}</h4>
-    </div>
-  </div>
-</header>
-
-<div class="container">
-  <nav>
-    <div class="side_navbar">
-      <a href="#" class="active">
-        <fa-icon [icon]="faTachometerAlt"></fa-icon> <span>Dashboard</span>
-      </a>
-      <a href="#">
-        <fa-icon [icon]="faUser"></fa-icon> <span>Profile</span>
-      </a>
-      <a href="/events">
-        <fa-icon [icon]="faCalendarAlt"></fa-icon> <span>Events</span>
-      </a>
-      <a href="/event-registration">
-        <fa-icon [icon]="faEdit"></fa-icon> <span>Event Registration</span>
-      </a>
-
-      <div class="logout">
-        <a href="#" (click)="logout($event)">
-          <fa-icon [icon]="faSignOutAlt"></fa-icon> Logout
-        </a>
-      </div>
-      
-    </div>
-  </nav>
+<app-user-sidebar></app-user-sidebar> 
   
 
   <div class="main-body">
-    <h2>Dashboard</h2>
+   
     <div class="promo_card">
       <h1>Welcome to Eventify, {{ username }}!</h1>
       <span>Your personalized dashboard is ready to help you manage your events efficiently.</span>
@@ -55,40 +14,22 @@
           <h4>Event History</h4>
           <a href="#">See all</a>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Date</th>
-              <th>Event Name</th>
-              <th>Event Location</th>
-              <th>Ticket Type</th>
-              <th>Ticket Quantity</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- ✅ Show message when no events are registered -->
-            <tr *ngIf="!registeredEvents || registeredEvents.length === 0">
-              <td colspan="6">No events registered yet.</td> <!-- ✅ Fixed colspan to 6 -->
-            </tr>
-
-            <!-- ✅ Iterate through registered events safely -->
-            <tr *ngFor="let eventReg of registeredEvents; let i = index">
-              <td>{{ i + 1 }}</td>
-              <td>{{ eventReg?.date || 'N/A' }}</td>
-              <td>{{ eventReg?.event_name || 'Unknown Event' }}</td>
-              <td>{{ eventReg?.location || 'Not Specified' }}</td>
-              <td>{{ eventReg?.ticket_type || 'General' }}</td>
-              <td>{{ eventReg?.ticket_quantity || 1 }}</td>
-              <td>
-                <button (click)="cancelRegistration(eventReg.id)">Cancel</button>
-            </td>
-              
-            </tr>
-          </tbody>
-        </table>
+        <app-table
+        *ngIf="registeredEvents.length > 0"
+        [columns]="tableColumns" 
+        [data]="registeredEvents"
+        [showSearch]="false"
+        [actions]="true"
+        [showCancelButton]="true" 
+        (cancelEvent)="cancelRegistration($event)">
+      </app-table>
+      
+      <p *ngIf="registeredEvents.length === 0">No events found.</p>
+      
       </div>
     </div>
   </div>
-</div>
+
+
+
+  

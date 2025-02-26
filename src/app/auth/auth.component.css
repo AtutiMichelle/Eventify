@@ -169,7 +169,9 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background: linear-gradient(to right, rgba(16, 9, 63, 0.9), rgba(52, 1, 58, 0.9), rgba(65, 21, 187, 0.9));
+  /* background: linear-gradient(-45deg, #7074F4, #d2e0d3, rgba(170, 77, 240, 0.9)); */
+  background: linear-gradient(to bottom right, #1E89DA, #AA4DF0);
+
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
